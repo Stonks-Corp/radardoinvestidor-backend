@@ -14,6 +14,8 @@ model Fundo {
   id                    Int          @default(autoincrement()) @id
   createdAt             DateTime     @default(now())
   updatedAt             DateTime     @updatedAt
+  cnpj_fundo            String
+  updates               Fundo_Update[]
   dt_cancel             DateTime
   admin                 String
   cd_cvm                String
@@ -22,7 +24,6 @@ model Fundo {
   dt_ini_ativ           DateTime
   cnpj_admin            String
   dt_ini_classe         DateTime
-  cnpj_fundo            String
   dt_ini_exerc          DateTime
   condom                String
   dt_ini_sit            DateTime
@@ -40,4 +41,14 @@ model Fundo {
   taxa_perfm            String
   dt_patrim_liq         DateTime
   taxa_adm              String
+}
+
+model Fundo_Update {
+  id                    Int          @default(autoincrement()) @id
+  cnpj_fundo            String
+  vlr_total             String
+  vlt_quota             String
+  captc_dia             String
+  resg_dia              String
+  rentabilidade         String
 }

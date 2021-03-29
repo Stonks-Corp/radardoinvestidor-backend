@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Fundo {
+  id                    Int          @default(autoincrement()) @id
+  createdAt             DateTime     @default(now())
+  updatedAt             DateTime     @updatedAt
+  dt_cancel             DateTime
+  admin                 String
+  cd_cvm                String
+  dt_fim_exerc          DateTime
+  classe                String
+  dt_ini_ativ           DateTime
+  cnpj_admin            String
+  dt_ini_classe         DateTime
+  cnpj_fundo            String
+  dt_ini_exerc          DateTime
+  condom                String
+  dt_ini_sit            DateTime
+  cpf_cnpj_gestor       String
+  sit                   String
+  rentab_fundo          String
+  pf_pj_gestor          String
+  invest_qualif         String
+  vl_patrim_liq         String
+  gestor                String
+  trib_lprazo           String
+  fundo_exclusivo       String
+  tp_fundo              String
+  fundo_cotas           String
+  taxa_perfm            String
+  dt_patrim_liq         DateTime
+  taxa_adm              String
+}

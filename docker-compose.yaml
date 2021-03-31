@@ -29,7 +29,7 @@ services:
     depends_on:
       - postgres
     command: >
-      /bin/sh -c "npx prisma migrate dev --preview-feature &&
+      /bin/sh -c "npx prisma migrate deploy &&
       yarn run dev"
 
 volumes:

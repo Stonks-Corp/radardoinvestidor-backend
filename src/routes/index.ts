@@ -7,7 +7,6 @@ routes.get('/', (req, res) => {
 });
 
 routes.post('/fundo', (req, res) => {
-  console.log(req.body);
   res.send(200);
 });
 

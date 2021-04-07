@@ -110,4 +110,6 @@ export const addFundInfo = async (file: IFunds): Promise<void> => {
   }
 };
 
-export const fundUpdate = async (file) => {};
+export const fundUpdate = async (): Promise<void> => {
+  console.log('in');
+};

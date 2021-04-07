@@ -1,10 +1,11 @@
 import prisma from '../database/prisma';
 import { IFunds } from './interface';
 
-const addFundInfo = (file: IFunds): void => {
+export const addFundInfo = async (file: IFunds): Promise<void> => {
   const funds = Object.entries(file);
 
-  funds.forEach((line) => {
+  // eslint-disable-next-line
+  for (const line of funds) {
     const {
       ADMIN,
       AUDITOR,
@@ -37,20 +38,21 @@ const addFundInfo = (file: IFunds): void => {
       VL_PATRIM_LIQ,
     } = line[1];
 
-    prisma.fundo.upsert({
+    // eslint-disable-next-line
+    await prisma.fundo.upsert({
       create: {
         cnpj_fundo: line[0],
-        dt_cancel: DT_CANCEL,
+        dt_cancel: new Date(DT_CANCEL) || null,
         admin: ADMIN,
         cd_cvm: CD_CVM,
-        dt_fim_exerc: DT_FIM_EXERC,
+        dt_fim_exerc: new Date(DT_FIM_EXERC) || null,
         classe: CLASSE,
-        dt_ini_ativ: DT_INI_ATIV,
+        dt_ini_ativ: new Date(DT_INI_ATIV) || null,
         cnpj_admin: CNPJ_ADMIN,
-        dt_ini_classe: DT_INI_CLASSE,
-        dt_ini_exerc: DT_INI_EXERC,
+        dt_ini_classe: new Date(DT_INI_CLASSE) || null,
+        dt_ini_exerc: new Date(DT_INI_EXERC) || null,
         condom: CONDOM,
-        dt_ini_sit: DT_INI_SIT,
+        dt_ini_sit: new Date(DT_INI_SIT) || null,
         cpf_cnpj_gestor: CPF_CNPJ_GESTOR,
         sit: SIT,
         rentab_fundo: RENTAB_FUNDO,
@@ -63,25 +65,25 @@ const addFundInfo = (file: IFunds): void => {
         tp_fundo: TP_FUNDO,
         fundo_cotas: FUNDO_COTAS,
         taxa_perfm: String(TAXA_PERFM),
-        dt_patrim_liq: DT_PATRIM_LIQ,
+        dt_patrim_liq: new Date(DT_PATRIM_LIQ) || null,
         taxa_adm: String(TAXA_ADM),
         auditor: AUDITOR,
         denom_social: DENOM_SOCIAL,
         cnpj_auditor: CNPJ_AUDITOR,
-        dt_const: DT_CONST,
+        dt_const: new Date(DT_CONST) || null,
       },
       update: {
-        dt_cancel: DT_CANCEL,
+        dt_cancel: new Date(DT_CANCEL) || null,
         admin: ADMIN,
         cd_cvm: CD_CVM,
-        dt_fim_exerc: DT_FIM_EXERC,
+        dt_fim_exerc: new Date(DT_FIM_EXERC) || null,
         classe: CLASSE,
-        dt_ini_ativ: DT_INI_ATIV,
+        dt_ini_ativ: new Date(DT_INI_ATIV) || null,
         cnpj_admin: CNPJ_ADMIN,
-        dt_ini_classe: DT_INI_CLASSE,
-        dt_ini_exerc: DT_INI_EXERC,
+        dt_ini_classe: new Date(DT_INI_CLASSE) || null,
+        dt_ini_exerc: new Date(DT_INI_EXERC) || null,
         condom: CONDOM,
-        dt_ini_sit: DT_INI_SIT,
+        dt_ini_sit: new Date(DT_INI_SIT) || null,
         cpf_cnpj_gestor: CPF_CNPJ_GESTOR,
         sit: SIT,
         rentab_fundo: RENTAB_FUNDO,
@@ -94,18 +96,18 @@ const addFundInfo = (file: IFunds): void => {
         tp_fundo: TP_FUNDO,
         fundo_cotas: FUNDO_COTAS,
         taxa_perfm: String(TAXA_PERFM),
-        dt_patrim_liq: DT_PATRIM_LIQ,
+        dt_patrim_liq: new Date(DT_PATRIM_LIQ) || null,
         taxa_adm: String(TAXA_ADM),
         auditor: AUDITOR,
         denom_social: DENOM_SOCIAL,
         cnpj_auditor: CNPJ_AUDITOR,
-        dt_const: DT_CONST,
+        dt_const: new Date(DT_CONST) || null,
       },
       where: {
         cnpj_fundo: line[0],
       },
     });
-  });
+  }
 };
 
-export default addFundInfo;
+export const fundUpdate = async (file) => {};

@@ -9,5 +9,5 @@ git clone http://tools.ages.pucrs.br/radar-do-investidor/backend.git
 2. Entrar no diretório do projeto:
 ```
 $ cd backend
-$ docker-compose -d up
+$ docker-compose -f docker-compose.yaml up
 ```

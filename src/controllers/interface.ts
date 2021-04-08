@@ -31,3 +31,16 @@ export interface IFunds {
     CNPJ_AUDITOR: string;
   };
 }
+
+export interface IUpdate{
+  [cnpj_fundo: string]:{
+    TP_FUNDO: string;
+    DT_COMPTC: string;
+    VL_TOTAL: number;
+    VL_QUOTA: number;
+    VL_PATRIM_LIQ: number;
+    CAPTC_DIA: number;
+    RESG_DIA: number;
+    NR_COTST: number;
+  };
+}

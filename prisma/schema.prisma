@@ -49,12 +49,17 @@ model Fundo {
 }
 
 model Fundo_Update {
-  id            Int    @id @default(autoincrement())
-  cnpj_fundo    String
-  vlr_total     String
-  vlt_quota     String
-  captc_dia     String
-  resg_dia      String
-  rentabilidade String
-  Fundo         Fundo @relation(fields: [cnpj_fundo], references: [cnpj_fundo])
+  id              Int                 @id @default(autoincrement())
+  cnpj_fundo_updt String              @unique
+  cnpj_fundo      String
+  vlr_total       String?
+  vlt_quota       String?
+  captc_dia       String?
+  resg_dia        String?
+  rentabilidade   String?
+  tp_fundo        String?
+  dt_comptc       DateTime?
+  vl_patrim_liq   String?
+  nr_cotst        String?
+  Fundo           Fundo @relation(fields: [cnpj_fundo], references: [cnpj_fundo])
 }

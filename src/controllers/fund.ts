@@ -1,5 +1,6 @@
 import prisma from '../database/prisma';
-import { IFunds } from './interface';
+import { IFunds, IUpdate } from './interface';
+
 
 export const addFundInfo = async (file: IFunds): Promise<void> => {
   const funds = Object.entries(file);
@@ -110,6 +111,50 @@ export const addFundInfo = async (file: IFunds): Promise<void> => {
   }
 };
 
-export const fundUpdate = async (): Promise<void> => {
-  console.log('in');
+export const fundUpdate = async (file: IUpdate): Promise<void> => {
+  const funds = Object.entries(file);
+  // eslint-disable-next-line
+  for (const line of funds) {
+    const {
+      TP_FUNDO,
+      DT_COMPTC,
+      VL_TOTAL,
+      VL_QUOTA,
+      VL_PATRIM_LIQ,
+      CAPTC_DIA,
+      RESG_DIA,
+      NR_COTST,
+    } = line[1];
+
+    // eslint-disable-next-line
+    await prisma.fundo_Update.upsert({
+      create: {
+        cnpj_fundo: line[0],
+        cnpj_fundo_updt: line[0],
+        vlr_total: String(VL_TOTAL),
+        vlt_quota: String(VL_QUOTA),
+        captc_dia: String(CAPTC_DIA),
+        resg_dia: String(RESG_DIA),
+        rentabilidade: "",
+        tp_fundo: String(TP_FUNDO),
+        dt_comptc: new Date(DT_COMPTC) || null,
+        vl_patrim_liq: String(VL_PATRIM_LIQ),
+        nr_cotst: String(NR_COTST),
+      },
+      update: {
+        vlr_total: String(VL_TOTAL),
+        vlt_quota: String(VL_QUOTA),
+        captc_dia: String(CAPTC_DIA),
+        resg_dia: String(RESG_DIA),
+        rentabilidade: "",
+        tp_fundo: TP_FUNDO,
+        dt_comptc: new Date(DT_COMPTC) || null,
+        vl_patrim_liq: String(VL_PATRIM_LIQ),
+        nr_cotst: String(NR_COTST),
+      },
+      where: {
+        cnpj_fundo_updt: line[0],
+      },
+    });
+  }
 };

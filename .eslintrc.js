@@ -19,6 +19,9 @@ module.exports = {
         ts: 'never',
       },
     ],
+    camelcase: 'off',
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': 'error',
   },
   settings: {
     'import/resolver': {

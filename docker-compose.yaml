@@ -22,6 +22,7 @@ services:
       - .:/app
     ports:
     - 4000:4000
+    - 8181:8181
     env_file:
       - .env
     links:
@@ -29,7 +30,7 @@ services:
     depends_on:
       - postgres
     command: >
-      /bin/sh -c "npx prisma migrate deploy &&
+      /bin/sh -c "npx prisma migrate dev --preview-feature &&
       yarn run dev"
 
 volumes:

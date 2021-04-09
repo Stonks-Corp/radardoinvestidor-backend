@@ -40,7 +40,6 @@ CREATE TABLE "Fundo" (
 -- CreateTable
 CREATE TABLE "Fundo_Update" (
     "id" SERIAL NOT NULL,
-    "cnpj_fundo_updt" TEXT NOT NULL,
     "cnpj_fundo" TEXT NOT NULL,
     "vlr_total" TEXT,
     "vlt_quota" TEXT,
@@ -57,9 +56,6 @@ CREATE TABLE "Fundo_Update" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Fundo.cnpj_fundo_unique" ON "Fundo"("cnpj_fundo");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Fundo_Update.cnpj_fundo_updt_unique" ON "Fundo_Update"("cnpj_fundo_updt");
 
 -- AddForeignKey
 ALTER TABLE "Fundo_Update" ADD FOREIGN KEY ("cnpj_fundo") REFERENCES "Fundo"("cnpj_fundo") ON DELETE CASCADE ON UPDATE CASCADE;

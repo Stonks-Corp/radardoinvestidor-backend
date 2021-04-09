@@ -50,7 +50,6 @@ model Fundo {
 
 model Fundo_Update {
   id              Int                 @id @default(autoincrement())
-  cnpj_fundo_updt String              @unique
   cnpj_fundo      String
   vlr_total       String?
   vlt_quota       String?

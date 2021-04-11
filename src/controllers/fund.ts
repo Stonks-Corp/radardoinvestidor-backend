@@ -111,8 +111,6 @@ export const addFundInfo = async (file: IFunds): Promise<void> => {
 };
 
 export const fundUpdate = async (file: IUpdate): Promise<void> => {
-  const errors: string[] = [];
-
   const funds = Object.entries(file);
   // eslint-disable-next-line
   for (const line of funds) {
@@ -150,7 +148,7 @@ export const fundUpdate = async (file: IUpdate): Promise<void> => {
         },
       });
     } catch (e) {
-      errors.push(line[0]);
+      console.log(`Fund update error: ${line[0]}`);
     }
   }
 };

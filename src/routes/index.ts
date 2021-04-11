@@ -7,9 +7,9 @@ routes.get('/', (req, res) => {
   res.send('Hello world');
 });
 
-routes.post('/fundo', async (req, res) => {
+routes.post('/fundo', (req, res) => {
   try {
-    await addFundInfo(req.body);
+    addFundInfo(req.body);
     res.status(200).send();
   } catch (e) {
     res.status(400).send({

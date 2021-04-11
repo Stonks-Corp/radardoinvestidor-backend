@@ -126,7 +126,10 @@ export const fundUpdate = async (file: IUpdate): Promise<void> => {
     } = line[1];
 
     // eslint-disable-next-line
-    await prisma.fundo.create({
+    await prisma.fundo.update({
+      where: {
+        cnpj_fundo: line[0],
+      },
       data: {
         updates: {
           create: {
@@ -137,8 +140,8 @@ export const fundUpdate = async (file: IUpdate): Promise<void> => {
             rentabilidade: '',
             tp_fundo: TP_FUNDO,
             dt_comptc: new Date(DT_COMPTC) || null,
-            vl_patrim_liq: VL_PATRIM_LIQ,
-            nr_cotst: NR_COTST,
+            vl_patrim_liq: String(VL_PATRIM_LIQ),
+            nr_cotst: String(NR_COTST),
           },
         },
       },

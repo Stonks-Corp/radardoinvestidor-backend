@@ -18,9 +18,9 @@ routes.post('/fundo', async (req, res) => {
   }
 });
 
-routes.post('/update', async (req, res) => {
+routes.post('/update', (req, res) => {
   try {
-    await fundUpdate(req.body);
+    fundUpdate(req.body);
     res.status(200).send();
   } catch (e) {
     res.status(400).send({

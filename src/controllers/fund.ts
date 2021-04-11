@@ -111,6 +111,8 @@ export const addFundInfo = async (file: IFunds): Promise<void> => {
 };
 
 export const fundUpdate = async (file: IUpdate): Promise<void> => {
+  const errors: string[] = [];
+
   const funds = Object.entries(file);
   // eslint-disable-next-line
   for (const line of funds) {
@@ -125,26 +127,30 @@ export const fundUpdate = async (file: IUpdate): Promise<void> => {
       NR_COTST,
     } = line[1];
 
-    // eslint-disable-next-line
-    await prisma.fundo.update({
-      where: {
-        cnpj_fundo: line[0],
-      },
-      data: {
-        updates: {
-          create: {
-            vlr_total: String(VL_TOTAL),
-            vlt_quota: String(VL_QUOTA),
-            captc_dia: String(CAPTC_DIA),
-            resg_dia: String(RESG_DIA),
-            rentabilidade: '',
-            tp_fundo: TP_FUNDO,
-            dt_comptc: new Date(DT_COMPTC) || null,
-            vl_patrim_liq: String(VL_PATRIM_LIQ),
-            nr_cotst: String(NR_COTST),
+    try {
+      // eslint-disable-next-line
+      await prisma.fundo.update({
+        where: {
+          cnpj_fundo: line[0],
+        },
+        data: {
+          updates: {
+            create: {
+              vlr_total: String(VL_TOTAL),
+              vlt_quota: String(VL_QUOTA),
+              captc_dia: String(CAPTC_DIA),
+              resg_dia: String(RESG_DIA),
+              rentabilidade: '',
+              tp_fundo: TP_FUNDO,
+              dt_comptc: new Date(DT_COMPTC) || null,
+              vl_patrim_liq: String(VL_PATRIM_LIQ),
+              nr_cotst: String(NR_COTST),
+            },
           },
         },
-      },
-    });
+      });
+    } catch (e) {
+      errors.push(line[0]);
+    }
   }
 };

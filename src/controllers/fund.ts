@@ -1,3 +1,4 @@
+import { Fundo } from '@prisma/client';
 import prisma from '../database/prisma';
 import { IFunds, IUpdate } from './interface';
 
@@ -113,6 +114,11 @@ export const addFundInfo = async (file: IFunds): Promise<void> => {
     }
   }
 };
+
+export const getFunds = async (): Promise<Fundo[]> =>  {
+  const fundos = await prisma.fundo.findMany();
+  return fundos;
+}
 
 export const fundUpdate = async (file: IUpdate): Promise<void> => {
   const funds = Object.entries(file);

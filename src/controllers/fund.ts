@@ -115,10 +115,25 @@ export const addFundInfo = async (file: IFunds): Promise<void> => {
   }
 };
 
-export const getFunds = async (): Promise<Fundo[]> =>  {
-  const fundos = await prisma.fundo.findMany();
+export const getFunds = async (search?: string): Promise<Fundo[]> => {
+  const fundos = await prisma.fundo.findMany({
+    where: {
+      OR: [
+        {
+          denom_social: {
+            contains: search,
+          },
+        },
+        {
+          cnpj_fundo: {
+            contains: search,
+          },
+        },
+      ],
+    },
+  });
   return fundos;
-}
+};
 
 export const fundUpdate = async (file: IUpdate): Promise<void> => {
   const funds = Object.entries(file);

@@ -1,6 +1,6 @@
 import express from 'express';
-import { addFundInfo, fundUpdate, getFunds } from '../controllers/fund';
 import { read } from 'fs';
+import { addFundInfo, fundUpdate, getFunds } from '../controllers/fund';
 
 const routes = express.Router();
 
@@ -10,7 +10,10 @@ routes.get('/', (req, res) => {
 
 routes.get('/pesquisa', async (req, res) => {
   try {
-    const fundos = await getFunds();
+    const param = req.query;
+    console.log(param);
+
+    const fundos = await getFunds(param?.s as string);
     res.status(200).send(fundos);
   } catch (e) {
     res.status(400).send({

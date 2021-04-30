@@ -122,11 +122,13 @@ export const getFunds = async (search?: string, skip?: number): Promise<Fundo[]>
         {
           denom_social: {
             contains: search,
+            mode: "insensitive"
           },
         },
         {
           cnpj_fundo: {
             contains: search,
+            mode: "insensitive"
           },
         },
       ],

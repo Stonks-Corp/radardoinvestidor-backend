@@ -1,5 +1,6 @@
 import express from 'express';
 import { addFundInfo, fundUpdate } from '../controllers/fund';
+import authentication from '../middleware/authentication';
 
 const routes = express.Router();
 
@@ -7,7 +8,7 @@ routes.get('/', (req, res) => {
   res.send('Hello world');
 });
 
-routes.post('/fundo', (req, res) => {
+routes.post('/fundo', authentication, (req, res) => {
   try {
     addFundInfo(req.body);
     res.status(200).send();
@@ -18,7 +19,7 @@ routes.post('/fundo', (req, res) => {
   }
 });
 
-routes.post('/update', (req, res) => {
+routes.post('/update', authentication, (req, res) => {
   try {
     fundUpdate(req.body);
     res.status(200).send();

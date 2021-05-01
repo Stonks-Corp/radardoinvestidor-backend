@@ -8,7 +8,9 @@ routes.get('/', (req, res) => {
   res.send('Hello world');
 });
 
-routes.post('/fundo', authentication, (req, res) => {
+routes.use(authentication);
+
+routes.post('/fundo', (req, res) => {
   try {
     addFundInfo(req.body);
     res.status(200).send();
@@ -19,7 +21,7 @@ routes.post('/fundo', authentication, (req, res) => {
   }
 });
 
-routes.post('/update', authentication, (req, res) => {
+routes.post('/update', (req, res) => {
   try {
     fundUpdate(req.body);
     res.status(200).send();

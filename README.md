@@ -14,6 +14,17 @@ $ cd backend
 $ docker-compose -f docker-compose.yaml up
 ```
 
+3. Quando terminar de utilizar o container
+```
+$ docker-compose down -v
+```
+
+O comando "-v" garante que o docker vai apagar o volume criado pelo container, caso esqueça de utilizar o "-v" 
+basta utilizar o seguinte comando para apagar volumes que não estão sendo utilizados:
+
+```
+$ docker volume prune
+```
 
 ## Alguns comandos para minupulação do postgres
 

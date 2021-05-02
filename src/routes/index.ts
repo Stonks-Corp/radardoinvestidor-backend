@@ -1,11 +1,14 @@
 import express from 'express';
 import { addFundInfo, fundUpdate } from '../controllers/fund';
+import authentication from '../middleware/authentication';
 
 const routes = express.Router();
 
 routes.get('/', (req, res) => {
   res.send('Hello world');
 });
+
+routes.use(authentication);
 
 routes.post('/fundo', (req, res) => {
   try {

@@ -115,20 +115,23 @@ export const addFundInfo = async (file: IFunds): Promise<void> => {
   }
 };
 
-export const getFunds = async (search?: string, skip?: number): Promise<Fundo[]> => {
+export const getFunds = async (
+  search?: string,
+  skip?: number
+): Promise<Fundo[]> => {
   const fundos = await prisma.fundo.findMany({
     where: {
       OR: [
         {
           denom_social: {
-            contains: search,
-            mode: "insensitive"
+            contains: search || '',
+            mode: 'insensitive',
           },
         },
         {
           cnpj_fundo: {
-            contains: search,
-            mode: "insensitive"
+            contains: search || '',
+            mode: 'insensitive',
           },
         },
       ],

@@ -1,5 +1,6 @@
 [
   {
+    "cnpj_fundo": "00001",
     "sit": "EM FUNCIONAMENTO NORMAL",
     "admin": "BANCO BRADESCO S.A.",
     "cd_cvm": "52043.0",
@@ -8,7 +9,7 @@
     "condom": "Aberto",
     "cpf_cnpj_gestor": "51.990.695/0001-37, 62.375.134/0001-44",
     "denom_social": "BRADESCO FUNDO DE INVESTIMENTO EM COTAS DE FI MULTIMERCADO PGBL/VGBL FUTURE COMPOSTO III",
-    "dt_cancel": "",
+    "dt_cancel": null,
     "dt_const": "1996-09-30",
     "dt_fim_exerc": "2021-06-30",
     "dt_ini_ativ": "1996-09-30",
@@ -30,8 +31,8 @@
     "auditor": "PRICEWATERHOUSECOOPERS auditorES INDEPENDENTES",
     "cnpj_auditor": "61.562.112/0001-20"
   },
-
   {
+    "cnpj_fundo": "00002",
     "sit": "EM FUNCIONAMENTO NORMAL",
     "admin": "BANCO BRADESCO S.A.",
     "cd_cvm": "49409.0",
@@ -40,7 +41,7 @@
     "condom": "Aberto",
     "cpf_cnpj_gestor": "51.990.695/0001-37, 62.375.134/0001-44",
     "denom_social": "BRADESCO H FUNDO DE INVESTIMENTO RENDA FIXA PGBL/VGBL FUTURE",
-    "dt_cancel": "",
+    "dt_cancel": null,
     "dt_const": "1996-10-23",
     "dt_fim_exerc": "2021-06-30",
     "dt_ini_ativ": "1996-10-23",
@@ -62,8 +63,8 @@
     "auditor": "PRICEWATERHOUSECOOPERS auditorES INDEPENDENTES",
     "cnpj_auditor": "61.562.112/0001-20"
   },
-
   {
+    "cnpj_fundo": "00003",
     "sit": "EM FUNCIONAMENTO NORMAL",
     "admin": "BANCO BRADESCO S.A.",
     "cd_cvm": "52019.0",
@@ -72,7 +73,7 @@
     "condom": "Aberto",
     "cpf_cnpj_gestor": "51.990.695/0001-37, 62.375.134/0001-44",
     "denom_social": "BRADESCO FUNDO DE INVESTIMENTO EM COTAS DE FI MULTIMERCADO PGBL/VGBL FUTURE COMPOSTO II",
-    "dt_cancel": "",
+    "dt_cancel": null,
     "dt_const": "1997-01-06",
     "dt_fim_exerc": "2021-06-30",
     "dt_ini_ativ": "1997-01-06",
@@ -94,8 +95,8 @@
     "auditor": "PRICEWATERHOUSECOOPERS auditorES INDEPENDENTES",
     "cnpj_auditor": "61.562.112/0001-20"
   },
-
   {
+    "cnpj_fundo": "00004",
     "sit": "EM FUNCIONAMENTO NORMAL",
     "admin": "BANCO SANTANDER (BRASIL) S.A.",
     "cd_cvm": "53449.0",
@@ -104,7 +105,7 @@
     "condom": "Aberto",
     "cpf_cnpj_gestor": "10.231.177/0001-52, 87.376.109/0001-06",
     "denom_social": "SANTANDER FIC FI PREV MODERADO MULTIMERCADO CREDITO PRIVADO",
-    "dt_cancel": "",
+    "dt_cancel": null,
     "dt_const": "1999-03-30",
     "dt_fim_exerc": "2021-12-31",
     "dt_ini_ativ": "1999-03-30",
@@ -126,8 +127,8 @@
     "auditor": "ERNST & YOUNG auditorES INDEPENDENTES S/S",
     "cnpj_auditor": "61.366.936/0001-25"
   },
-
   {
+    "cnpj_fundo": "00005",
     "sit": "EM FUNCIONAMENTO NORMAL",
     "admin": "BANCO SANTANDER (BRASIL) S.A.",
     "cd_cvm": "53457.0",
@@ -136,7 +137,7 @@
     "condom": "Aberto",
     "cpf_cnpj_gestor": "10.231.177/0001-52, 87.376.109/0001-06",
     "denom_social": "SANTANDER FIC FI PREV FIX RENDA FIXA CREDITO PRIVADO",
-    "dt_cancel": "",
+    "dt_cancel":  null,
     "dt_const": "1999-03-30",
     "dt_fim_exerc": "2021-12-31",
     "dt_ini_ativ": "1999-03-30",
@@ -158,8 +159,8 @@
     "auditor": "ERNST & YOUNG auditorES INDEPENDENTES S/S",
     "cnpj_auditor": "61.366.936/0001-25"
   },
-
   {
+    "cnpj_fundo": "00006",
     "sit": "EM FUNCIONAMENTO NORMAL",
     "admin": "BANCO BRADESCO S.A.",
     "cd_cvm": "6157.0",
@@ -168,7 +169,7 @@
     "condom": "Aberto",
     "cpf_cnpj_gestor": "51.990.695/0001-37, 62.375.134/0001-44",
     "denom_social": "BRADESCO FUNDO DE INVESTIMENTO EM COTAS DE FUNDOS DE INVESTIMENTO RENDA FIXA PREV F\u00c1CIL PGBL FIX",
-    "dt_cancel": "",
+    "dt_cancel":  null,
     "dt_const": "1999-05-10",
     "dt_fim_exerc": "2021-04-30",
     "dt_ini_ativ": "1999-05-10",
@@ -190,8 +191,8 @@
     "auditor": "ERNST & YOUNG auditorES INDEPENDENTES S/S",
     "cnpj_auditor": "61.366.936/0001-25"
   },
-
   {
+    "cnpj_fundo": "00007",
     "sit": "EM FUNCIONAMENTO NORMAL",
     "admin": "BANCO BNP PARIBAS BRASIL S/A",
     "cd_cvm": "46469.0",
@@ -200,7 +201,7 @@
     "condom": "Aberto",
     "cpf_cnpj_gestor": "04.046.576/0001-40, 04.160.039/0001-27",
     "denom_social": "FUNDO DE INVESTIMENTO RENDA FIXA MAPFRE TR SOBERANO",
-    "dt_cancel": "",
+    "dt_cancel":  null,
     "dt_const": "1999-01-14",
     "dt_fim_exerc": "2022-03-31",
     "dt_ini_ativ": "1999-01-14",
@@ -222,8 +223,8 @@
     "auditor": "KPMG auditorES INDEPENDENTES",
     "cnpj_auditor": "57.755.217/0001-29"
   },
-
   {
+    "cnpj_fundo": "00008",
     "sit": "EM FUNCIONAMENTO NORMAL",
     "admin": "BANCO BRADESCO S.A.",
     "cd_cvm": "49379.0",
@@ -232,7 +233,7 @@
     "condom": "Aberto",
     "cpf_cnpj_gestor": "51.990.695/0001-37, 62.375.134/0001-44",
     "denom_social": "PLANO ACCOR DE PREVID\u00caNCIA FUNDO DE INVESTIMENTO RENDA FIXA PGBL/VGBL",
-    "dt_cancel": "",
+    "dt_cancel":  null,
     "dt_const": "1999-03-17",
     "dt_fim_exerc": "2021-06-30",
     "dt_ini_ativ": "1999-03-17",
@@ -254,8 +255,8 @@
     "auditor": "PRICEWATERHOUSECOOPERS auditorES INDEPENDENTES",
     "cnpj_auditor": "61.562.112/0001-20"
   },
-
   {
+    "cnpj_fundo": "00009",
     "sit": "EM FUNCIONAMENTO NORMAL",
     "admin": "BANCO BRADESCO S.A.",
     "cd_cvm": "52027.0",
@@ -264,7 +265,7 @@
     "condom": "Aberto",
     "cpf_cnpj_gestor": "51.990.695/0001-37, 62.375.134/0001-44",
     "denom_social": "BRADESCO FUNDO DE INVESTIMENTO EM COTAS DE FI MULTIMERCADO PGBL/VGBL FUTURE COMPOSTO I",
-    "dt_cancel": "",
+    "dt_cancel":  null,
     "dt_const": "1999-02-02",
     "dt_fim_exerc": "2021-06-30",
     "dt_ini_ativ": "1999-02-02",
@@ -286,8 +287,8 @@
     "auditor": "PRICEWATERHOUSECOOPERS auditorES INDEPENDENTES",
     "cnpj_auditor": "61.562.112/0001-20"
   },
-
   {
+    "cnpj_fundo": "00010",
     "sit": "EM FUNCIONAMENTO NORMAL",
     "admin": "SUL AMERICA INVESTIMENTOS DTVM S.A.",
     "cd_cvm": "51047.0",
@@ -296,7 +297,7 @@
     "condom": "Aberto",
     "cpf_cnpj_gestor": "01.704.513/0001-46, 21.813.291/0001-07",
     "denom_social": "SULAMERICA MIX 49 FUNDO DE INVESTIMENTO EM COTAS DE FUNDO DE INVESTIMENTO MULTIMERCADO",
-    "dt_cancel": "",
+    "dt_cancel":  null,
     "dt_const": "1999-08-09",
     "dt_fim_exerc": "2021-12-31",
     "dt_ini_ativ": "1999-08-09",
@@ -318,8 +319,8 @@
     "auditor": "DELOITTE TOUCHE TOHMATSU auditorES INDEPENDENTES",
     "cnpj_auditor": "49.928.567/0001-11"
   },
-
   {
+    "cnpj_fundo": "00011",
     "sit": "EM FUNCIONAMENTO NORMAL",
     "admin": "BANCO BRADESCO S.A.",
     "cd_cvm": "52086.0",
@@ -328,7 +329,7 @@
     "condom": "Aberto",
     "cpf_cnpj_gestor": "51.990.695/0001-37, 62.375.134/0001-44",
     "denom_social": "BRADESCO FUNDO DE INVESTIMENTO EM COTAS DE FUNDOS DE INVESTIMENTO MULTIMERCADO PGBL AGRESSIVO",
-    "dt_cancel": "",
+    "dt_cancel":  null,
     "dt_const": "1999-04-23",
     "dt_fim_exerc": "2021-06-30",
     "dt_ini_ativ": "1999-04-23",
@@ -350,8 +351,8 @@
     "auditor": "PRICEWATERHOUSECOOPERS auditorES INDEPENDENTES",
     "cnpj_auditor": "61.562.112/0001-20"
   },
-
   {
+    "cnpj_fundo": "00012",
     "sit": "EM FUNCIONAMENTO NORMAL",
     "admin": "BANCO BRADESCO S.A.",
     "cd_cvm": "52094.0",
@@ -360,7 +361,7 @@
     "condom": "Aberto",
     "cpf_cnpj_gestor": "51.990.695/0001-37, 62.375.134/0001-44",
     "denom_social": "BRADESCO H FUNDO DE INVESTIMENTO RENDA FIXA PGBL CONSERVADOR",
-    "dt_cancel": "",
+    "dt_cancel":  null,
     "dt_const": "1999-04-23",
     "dt_fim_exerc": "2021-06-30",
     "dt_ini_ativ": "1999-04-23",
@@ -382,8 +383,8 @@
     "auditor": "PRICEWATERHOUSECOOPERS auditorES INDEPENDENTES",
     "cnpj_auditor": "61.562.112/0001-20"
   },
-
   {
+    "cnpj_fundo": "00013",
     "sit": "EM FUNCIONAMENTO NORMAL",
     "admin": "BANCO BRADESCO S.A.",
     "cd_cvm": "52159.0",
@@ -392,7 +393,7 @@
     "condom": "Aberto",
     "cpf_cnpj_gestor": "51.990.695/0001-37, 62.375.134/0001-44",
     "denom_social": "BRADESCO FUNDO DE INVESTIMENTO EM COTAS DE FUNDOS DE INVESTIMENTO MULTIMERCADO PGBL MODERADO II",
-    "dt_cancel": "",
+    "dt_cancel":  null,
     "dt_const": "1999-04-19",
     "dt_fim_exerc": "2021-06-30",
     "dt_ini_ativ": "1999-04-19",
@@ -414,8 +415,8 @@
     "auditor": "PRICEWATERHOUSECOOPERS auditorES INDEPENDENTES",
     "cnpj_auditor": "61.562.112/0001-20"
   },
-
   {
+    "cnpj_fundo": "00014",
     "sit": "EM FUNCIONAMENTO NORMAL",
     "admin": "BANCO BRADESCO S.A.",
     "cd_cvm": "52140.0",
@@ -424,7 +425,7 @@
     "condom": "Aberto",
     "cpf_cnpj_gestor": "51.990.695/0001-37, 62.375.134/0001-44",
     "denom_social": "BRADESCO FUNDO DE INVESTIMENTO EM COTAS DE FUNDOS DE INVESTIMENTO MULTIMERCADO PGBL MODERADO",
-    "dt_cancel": "",
+    "dt_cancel":  null,
     "dt_const": "1999-04-23",
     "dt_fim_exerc": "2021-06-30",
     "dt_ini_ativ": "1999-04-23",

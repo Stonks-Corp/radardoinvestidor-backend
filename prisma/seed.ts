@@ -44,7 +44,19 @@ async function main() {
   await Promise.all(
     parsedFunds.map(async (fund) => {
       await prisma.fundo.create({
-        data: fund,
+        data: {
+          ...fund,
+          dt_const: new Date(fund.dt_const),
+          dt_fim_exerc: new Date(fund.dt_fim_exerc),
+          dt_ini_ativ: new Date(fund.dt_ini_ativ),
+          dt_ini_classe: new Date(fund.dt_ini_classe),
+          dt_ini_exerc: new Date(fund.dt_ini_exerc),
+          dt_ini_sit: new Date(fund.dt_ini_sit),
+          dt_patrim_liq: new Date(fund.dt_patrim_liq),
+          taxa_adm: String(fund.taxa_adm),
+          taxa_perfm: String(fund.taxa_perfm),
+          vl_patrim_liq: String(fund.vl_patrim_liq),
+        },
       });
     })
   );

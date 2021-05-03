@@ -11,9 +11,10 @@ routes.get('/', (req, res) => {
 routes.get('/pesquisa', async (req, res) => {
   try {
     const param = req.query;
-    console.log(param);
-
-    const fundos = await getFunds(param?.s as string, param?.skip as unknown as number);
+    const fundos = await getFunds(
+      param?.s as string,
+      (param?.skip as unknown) as number
+    );
     res.status(200).send(fundos);
   } catch (e) {
     res.status(400).send({

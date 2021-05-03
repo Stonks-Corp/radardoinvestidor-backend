@@ -1,3 +1,4 @@
+import { Fundo } from '@prisma/client';
 import prisma from '../database/prisma';
 import { IFunds, IUpdate } from './interface';
 
@@ -112,6 +113,33 @@ export const addFundInfo = async (file: IFunds): Promise<void> => {
       console.log(`Fund update error: ${line[0]}`);
     }
   }
+};
+
+export const getFunds = async (
+  search?: string,
+  skip?: number
+): Promise<Fundo[]> => {
+  const fundos = await prisma.fundo.findMany({
+    where: {
+      OR: [
+        {
+          denom_social: {
+            contains: search || '',
+            mode: 'insensitive',
+          },
+        },
+        {
+          cnpj_fundo: {
+            contains: search || '',
+            mode: 'insensitive',
+          },
+        },
+      ],
+    },
+    take: 50,
+    skip: skip || 0,
+  });
+  return fundos;
 };
 
 export const fundUpdate = async (file: IUpdate): Promise<void> => {

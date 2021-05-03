@@ -31,8 +31,8 @@ services:
       - postgres
     command: >
       /bin/sh -c "npx prisma migrate dev --preview-feature &&
+      prisma db seed --preview-feature &&
       yarn run dev"
 
 volumes:
   postgres:
-    name: postgres-db

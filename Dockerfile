@@ -6,9 +6,8 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 ENV NODE_ENV=production
 
-RUN apt-get update \
-    && apt-get install dumb-init -y \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk update \
+    && apk add dumb-init -y
 
 COPY package.json /app/package.json
 COPY prisma /app/prisma/

@@ -117,7 +117,7 @@ export const addFundInfo = async (file: IFunds): Promise<void> => {
 
 export const getFunds = async (
   search?: string,
-  skip?: number
+  skip?: string
 ): Promise<Fundo[]> => {
   const fundos = await prisma.fundo.findMany({
     where: {
@@ -136,8 +136,8 @@ export const getFunds = async (
         },
       ],
     },
-    take: 50,
-    skip: skip || 0,
+    take: 2,
+    skip: skip ? parseInt(skip, 10) : 0,
   });
   return fundos;
 };

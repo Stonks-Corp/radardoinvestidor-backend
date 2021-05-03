@@ -13,7 +13,7 @@ routes.get('/pesquisa', async (req, res) => {
     const param = req.query;
     const fundos = await getFunds(
       param?.s as string,
-      (param?.skip as unknown) as number
+      (param?.skip as unknown) as string
     );
     res.status(200).send(fundos);
   } catch (e) {

@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "rimraf build && tsc",
     "dev": "npx nodemon --inspect=0.0.0.0:8181 src/server.ts",
     "generate": "npx prisma generate",
     "migrate": "npx prisma migrate dev",

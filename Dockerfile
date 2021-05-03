@@ -7,7 +7,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 ENV NODE_ENV=production
 
 RUN apk update \
-    && apk add dumb-init -y
+    && apk add dumb-init
 
 COPY package.json /app/package.json
 COPY prisma /app/prisma/

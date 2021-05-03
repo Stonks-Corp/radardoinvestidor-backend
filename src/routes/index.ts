@@ -1,6 +1,6 @@
 import express from 'express';
-import { read } from 'fs';
 import { addFundInfo, fundUpdate, getFunds } from '../controllers/fund';
+import authentication from '../middleware/authentication';
 
 const routes = express.Router();
 
@@ -21,6 +21,8 @@ routes.get('/pesquisa', async (req, res) => {
     });
   }
 });
+
+routes.use(authentication);
 
 routes.post('/fundo', (req, res) => {
   try {

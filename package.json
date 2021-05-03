@@ -2,9 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "build": "rimraf build && tsc",
+    "start": "node build/server.js",
     "dev": "npx nodemon --inspect=0.0.0.0:8181 src/server.ts",
     "generate": "npx prisma generate",
     "migrate": "npx prisma migrate dev",

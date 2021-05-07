@@ -136,7 +136,7 @@ export const getFunds = async (
         },
       ],
     },
-    take: 2,
+    take: 50,
     skip: skip ? parseInt(skip, 10) : 0,
   });
   return fundos;

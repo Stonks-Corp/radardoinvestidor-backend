@@ -1,13 +1,13 @@
 FROM node:15-alpine AS builder
 
+ARG DATABASE_URL
+ARG API_KEY
+
 WORKDIR /app
 
 # Add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 ENV NODE_ENV=production
-
-RUN apk update \
-    && apk add dumb-init
 
 COPY package.json /app/package.json
 COPY prisma /app/prisma/
@@ -26,6 +26,9 @@ COPY . /app
 RUN npm run build
 
 FROM node:15-alpine
+
+RUN apk update \
+    && apk add dumb-init
 
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package*.json ./

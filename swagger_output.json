@@ -119,39 +119,175 @@
           "format": "int64"
         },
         "createdAt": {
-          "description": "date in UTC when token expires",
-          "schema": {
-            "type": "string",
-            "format": "date-time"
-          }
+          "description": "Data de criação do fundo no banco de dados.",
+          "type": "string",
+          "format": "date",
+          "example": "2021-12-31"
         },
         "updatedAt": {
-          "description": "date in UTC when token expires",
-          "schema": {
-            "type": "string",
-            "format": "date-time"
-          }
+          "description": "Data de alteração do fundo no banco de dados.",
+          "type": "string",
+          "format": "date",
+          "example": "2021-12-31"
         },
         "cnpj_fundo": {
           "type": "string",
-          "example": "60.409.075/0001-52"
+          "description": "CNPJ do fundo de investimento.",
+          "example": "60.746.948/0001-12"
+        },
+        "updates": {
+          "description": "Dados diários do fundo.",
+          "type": "Fundo_Update[]",
+          "format": "array"
+        },
+        "auditor": {
+          "type": "string"
+        },
+        "cnpj_auditor": {
+          "type": "string"
+        },
+        "denom_social": {
+          "type": "string"
+        },
+        "dt_const": {
+          "type": "string",
+          "format": "date"
+        },
+        "dt_cancel": {
+          "type": "string",
+          "format": "date"
+        },
+        "admin": {
+          "type": "string"
+        },
+        "cd_cvm": {
+          "type": "string"
+        },
+        "dt_fim_exerc": {
+          "type": "string",
+          "format": "date"
+        },
+        "classe": {
+          "type": "string"
+        },
+        "dt_ini_ativ": {
+          "type": "string",
+          "format": "date"
+        },
+        "cnpj_admin": {
+          "type": "string",
+          "format": "date"
+        },
+        "dt_ini_classe": {
+          "type": "string",
+          "format": "date"
+        },
+        "dt_ini_exerc": {
+          "type": "string",
+          "format": "date"
+        },
+        "condom": {
+          "type": "string"
+        },
+        "dt_ini_sit": {
+          "type": "string",
+          "format": "date"
+        },
+        "cpf_cnpj_gestor": {
+          "type": "string"
+        },
+        "sit": {
+          "type": "string"
+        },
+        "rentab_fundo": {
+          "type": "string"
+        },
+        "pf_pj_gestor": {
+          "type": "string"
+        },
+        "invest_qualif": {
+          "type": "string"
+        },
+        "vl_patrim_liq": {
+          "type": "string"
+        },
+        "gestor": {
+          "type": "string"
+        },
+        "trib_lprazo": {
+          "type": "string"
+        },
+        "fundo_exclusivo": {
+          "type": "string"
+        },
+        "tp_fundo": {
+          "type": "string"
+        },
+        "fundo_cotas": {
+          "type": "string"
+        },
+        "taxa_perfm": {
+          "type": "string"
+        },
+        "dt_patrim_liq": {
+          "type": "string",
+          "format": "date"
+        },
+        "taxa_adm": {
+          "type": "string"
         }
       }
     },
-      "fundo_update": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          }
+    "fundo_update": {
+      "type": "object",
+      "required": [
+        "id",
+        "cnpj_fundo"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
         },
-        "xml": {
-          "name": "Category"
+        "cnpj_fundo": {
+          "type": "string",
+          "description": "CNPJ do fundo de investimento.",
+          "example": "60.746.948/0001-12"},
+        "vlr_total": {
+          "type": "string"
+        },
+        "vlt_quota": {
+          "type": "string"
+        },
+        "captc_dia": {
+          "type": "string"
+        },
+        "resg_dia": {
+          "type": "string"
+        },
+        "rentabilidade": {
+          "type": "string"
+        },
+        "tp_fundo": {
+          "type": "string"
+        },
+        "dt_comptc": {
+          "type": "string",
+          "format": "date",
+          "example": "2021-12-31"
+        },
+        "vl_patrim_liq": {
+          "type": "string"
+        },
+        "nr_cotst": {
+          "type": "string"
+        },
+        "Fundo": {
+          "description": "Referencia pro fundo.",
+          "type": "Fundo",
+          "format": "Object"
         }
       }
     }
   }
+}

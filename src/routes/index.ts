@@ -23,6 +23,16 @@ routes.get('/pesquisa', async (req: Request, res: Response) => {
   }
 });
 
+routes.get('/fundo/:cnpj', async (req: Request, res: Response) => {
+  try {
+    const { cnpj } = req.params;
+  } catch (e) {
+    res.send(400).send({
+      error: 'Failed to fetch fund',
+    });
+  }
+});
+
 routes.use(authentication);
 
 routes.post('/fundo', (req: Request, res: Response) => {

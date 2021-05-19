@@ -1,6 +1,6 @@
 import { Fundo } from '@prisma/client';
 import prisma from '../database/prisma';
-import { IFunds, IUpdate } from './interface';
+import { IFundDetails, IFunds, IUpdate } from './interface';
 
 export const addFundInfo = async (file: IFunds): Promise<void> => {
   const funds = Object.entries(file);
@@ -140,6 +140,73 @@ export const getFunds = async (
     skip: skip ? parseInt(skip, 10) : 0,
   });
   return fundos;
+};
+
+export const getFundDetails = async (
+  cnpj: string,
+): Promise<IFundDetails> => {
+  const fundosDetail = await prisma.fundo.findFirst({
+    where:{
+      cnpj_fundo:{
+        contains: cnpj,
+        mode: 'insensitive',
+      },
+    },
+    select:{
+      denom_social: true,
+      cnpj_fundo: true,
+      classe: true,
+      vl_patrim_liq: true,
+      tp_fundo: true,
+      sit: true,
+      dt_ini_ativ:true,
+      admin: true,
+      cd_cvm: true,
+      cnpj_admin: true,
+      condom: true,
+      cpf_cnpj_gestor: true,
+      dt_cancel: true,
+      dt_const: true,
+      dt_fim_exerc: true,
+      dt_ini_classe: true,
+      dt_ini_exerc: true,
+      dt_ini_sit: true,
+      dt_patrim_liq: true,
+      fundo_cotas: true,
+      fundo_exclusivo: true,
+      gestor: true,
+      invest_qualif: true,
+      pf_pj_gestor: true,
+      rentab_fundo: true,
+      taxa_adm: true,
+      taxa_perfm: true,
+      trib_lprazo:true,
+      auditor: true,
+      cnpj_auditor: true,
+      updates: {
+        select: {
+          tp_fundo: true,
+          dt_comptc: true,
+          vlr_total: true,
+          vlt_quota: true,
+          captc_dia: true,
+          resg_dia: true,
+          nr_cotst: true,
+        },
+      },
+    },
+  });
+
+  return fundosDetail.map((fund) => ({
+    ...fund,
+    tp_fundo: fund.updates[fund.updates.length - 1].tp_fundo,
+    dt_comptc: fund.updates[fund.updates.length - 1].dt_comptc,
+    vlr_total: fund.updates[fund.updates.length - 1].vlr_total,
+    vlt_quota: fund.updates[fund.updates.length - 1].vlt_quota,
+    captc_dia: fund.updates[fund.updates.length - 1].captc_dia,
+    resg_dia: fund.updates[fund.updates.length - 1].resg_dia,
+    nr_cotst: fund.updates[fund.updates.length - 1].nr_cotst,
+  }));
 };
 
 export const fundUpdate = async (file: IUpdate): Promise<void> => {

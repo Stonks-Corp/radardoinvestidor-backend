@@ -1,78 +1,157 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "version": "1.0.0",
-      "title": "Radar do Investidor",
-      "description": "Documentação do backend da aplicação Radar do Investidor."
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Radar do Investidor",
+    "description": "Documentação do backend da aplicação Radar do Investidor."
+  },
+  "host": "localhost:4000",
+  "basePath": "/",
+  "tags": [
+    "Raiz"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "tags": [
+    {
+      "name": "Raiz",
+      "description": "Raiz da aplicação."
     },
-    "host": "localhost:4000",
-    "basePath": "/",
-    "tags": [],
-    "schemes": [
-      "http"
-    ],
-    "consumes": [],
-    "produces": [],
-    "paths": {
-      "/": {
-        "get": {
-          "tags": [],
-          "description": "",
-          "parameters": [],
-          "responses": {}
-        }
-      },
-      "/pesquisa": {
-        "get": {
-          "tags": [],
-          "description": "Retorna os fundos encontrados no banco de dados, utilizando o parametro query enviado.\nAtualmente, busca pelas colunas de denominação social do fundo e pelo cnpj do fundo.",
-          "parameters": [{
-            "name": "query",
+    {
+      "name": "Rotas",
+      "description": "Funções de rotas do banco de dados."
+    }
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Raiz"
+        ],
+        "description": "A raiz não foi implementada. Usar as funções de rotas.",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api/pesquisa": {
+      "get": {
+        "tags": [
+          "Rotas"
+        ],
+        "summary": "Pesquisa uma string no banco de dados",
+        "description": "Retorna os fundos encontrados no banco de dados.\nAtualmente, busca pelas colunas de denominação social do fundo e pelo cnpj do fundo.",
+        "operationId": "pesquisa",
+        "parameters": [
+          {
+            "name": "s",
+            "in": "query",
             "description": "Recebe uma palavra ou segmento do qual deseja realizar a pesquisa no banco de dados.",
             "required": true,
-            "type": "String",
-            "paramType": "path"
-          }],
-          "responses": {
-            "200": {
-              "description": "OK"
-            },
-            "400": {
-              "description": "Bad Request"
+            "schema": {
+              "type": "string"
             }
           }
-        }
-      },
-      "/fundo": {
-        "post": {
-          "tags": [],
-          "description": "",
-          "parameters": [],
-          "responses": {
-            "200": {
-              "description": "OK"
-            },
-            "400": {
-              "description": "Bad Request"
-            }
-          }
-        }
-      },
-      "/update": {
-        "post": {
-          "tags": [],
-          "description": "",
-          "parameters": [],
-          "responses": {
-            "200": {
-              "description": "OK"
-            },
-            "400": {
-              "description": "Bad Request"
-            }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
     },
-    "definitions": {}
+    "/api/fundo": {
+      "post": {
+        "tags": [
+          "Rotas"
+        ],
+        "summary": "Adiciona um novo fundo no banco de dados.",
+        "description": "Passa o modelo das tabelas como parametro. Sem url do modelo ainda ❗",
+        "operationId": "fundo",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/update": {
+      "post": {
+        "tags": [
+          "Rotas"
+        ],
+        "summary": "Atualiza um fundo no banco de dados.",
+        "description": "Passa o id e os novos dados do modelo. Sem url do modelo ainda ❗",
+        "operationId": "update",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "fundo": {
+      "type": "object",
+      "required": [
+        "id",
+        "createdAt",
+        "updatedAt",
+        "cnpj_fundo"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createdAt": {
+          "description": "date in UTC when token expires",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "updatedAt": {
+          "description": "date in UTC when token expires",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "cnpj_fundo": {
+          "type": "string",
+          "example": "60.409.075/0001-52"
+        }
+      }
+    },
+      "fundo_update": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "Category"
+        }
+      }
+    }
   }

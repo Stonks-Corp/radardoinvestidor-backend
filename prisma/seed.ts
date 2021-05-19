@@ -78,24 +78,18 @@ async function main() {
 
   await Promise.all(
     parsedUpdates.map(async (update) => {
-      await prisma.fundo_Update.update({
-        where: {
-          cnpj_fundo: update.cnpj_fundo,
-        },
+      await prisma.fundo_Update.create({
         data: {
-          updates: {
-            create: {
-              vlr_total: String(update.vlr_total),
-              vlt_quota: String(update.vlt_quota),
-              captc_dia: String(update.captc_dia),
-              resg_dia: String(update.resg_dia),
-              rentabilidade: '',
-              tp_fundo: String(update.tp_fundo),
-              dt_comptc: new Date(update.dt_comptc) || null,
-              vl_patrim_liq: String(update.vl_patrim_liq),
-              nr_cotst: String(update.nr_cotst),
-            },
-          },
+            ...update,
+            vlr_total: String(update.vlr_total),
+            vlt_quota: String(update.vlt_quota),
+            captc_dia: String(update.captc_dia),
+            resg_dia: String(update.resg_dia),
+            rentabilidade: '',
+            tp_fundo: String(update.tp_fundo),
+            dt_comptc: new Date(update.dt_comptc) || null,
+            vl_patrim_liq: String(update.vl_patrim_liq),
+            nr_cotst: String(update.nr_cotst)
         },
       });
     })

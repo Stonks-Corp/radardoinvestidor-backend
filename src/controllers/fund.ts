@@ -155,11 +155,11 @@ export const getFunds = async (
   }));
 };
 
-export const fundUpdate = async (file: IUpdate): Promise<void> => {
-  const funds = Object.entries(file);
+export const fundUpdate = async (file: IUpdate[]): Promise<void> => {
   // eslint-disable-next-line
-  for (const line of funds) {
+  for (const line of file) {
     const {
+      CNPJ_FUNDO,
       TP_FUNDO,
       DT_COMPTC,
       VL_TOTAL,
@@ -168,32 +168,49 @@ export const fundUpdate = async (file: IUpdate): Promise<void> => {
       CAPTC_DIA,
       RESG_DIA,
       NR_COTST,
-    } = line[1];
+    } = line;
 
     try {
       // eslint-disable-next-line
       await prisma.fundo.update({
         where: {
-          cnpj_fundo: line[0],
+          cnpj_fundo: String(CNPJ_FUNDO),
         },
         data: {
           updates: {
-            create: {
-              vlr_total: String(VL_TOTAL),
-              vlt_quota: String(VL_QUOTA),
-              captc_dia: String(CAPTC_DIA),
-              resg_dia: String(RESG_DIA),
-              rentabilidade: '',
-              tp_fundo: TP_FUNDO,
-              dt_comptc: new Date(DT_COMPTC) || null,
-              vl_patrim_liq: String(VL_PATRIM_LIQ),
-              nr_cotst: String(NR_COTST),
+            upsert: {
+              where: {
+                cnpj_fundo_dt_comptc: {
+                  cnpj_fundo: CNPJ_FUNDO,
+                  dt_comptc: new Date(DT_COMPTC),
+                },
+              },
+              update: {
+                vlr_total: String(VL_TOTAL),
+                vlt_quota: String(VL_QUOTA),
+                captc_dia: String(CAPTC_DIA),
+                resg_dia: String(RESG_DIA),
+                tp_fundo: TP_FUNDO,
+                dt_comptc: new Date(DT_COMPTC) || null,
+                vl_patrim_liq: String(VL_PATRIM_LIQ),
+                nr_cotst: String(NR_COTST),
+              },
+              create: {
+                vlr_total: String(VL_TOTAL),
+                vlt_quota: String(VL_QUOTA),
+                captc_dia: String(CAPTC_DIA),
+                resg_dia: String(RESG_DIA),
+                tp_fundo: TP_FUNDO,
+                dt_comptc: new Date(DT_COMPTC) || null,
+                vl_patrim_liq: String(VL_PATRIM_LIQ),
+                nr_cotst: String(NR_COTST),
+              },
             },
           },
         },
       });
     } catch (e) {
-      console.log(`Fund update error: ${line[0]}`);
+      console.log(`Fund update error: ${CNPJ_FUNDO}`);
     }
   }
 };

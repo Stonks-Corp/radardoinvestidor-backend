@@ -151,7 +151,8 @@ export const getFunds = async (
   });
   return fundos.map((fund) => ({
     ...fund,
-    nr_cotst: fund.updates[fund.updates.length - 1].nr_cotst,
+    updates: undefined,
+    nr_cotst: fund.updates[fund.updates.length - 1]?.nr_cotst,
   }));
 };
 

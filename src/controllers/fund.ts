@@ -1,6 +1,5 @@
-import { Fundo } from '@prisma/client';
 import prisma from '../database/prisma';
-import { IFunds, IUpdate } from './interface';
+import { IFunds, IInitialFundData, IUpdate } from './interface';
 
 export const addFundInfo = async (file: IFunds): Promise<void> => {
   const funds = Object.entries(file);
@@ -118,7 +117,7 @@ export const addFundInfo = async (file: IFunds): Promise<void> => {
 export const getFunds = async (
   search?: string,
   skip?: string
-): Promise<Fundo[]> => {
+): Promise<IInitialFundData[]> => {
   const fundos = await prisma.fundo.findMany({
     where: {
       OR: [
@@ -136,10 +135,25 @@ export const getFunds = async (
         },
       ],
     },
+    select: {
+      denom_social: true,
+      cnpj_fundo: true,
+      vl_patrim_liq: true,
+      classe: true,
+      updates: {
+        select: {
+          nr_cotst: true,
+        },
+      },
+    },
     take: 50,
     skip: skip ? parseInt(skip, 10) : 0,
   });
-  return fundos;
+  return fundos.map((fund) => ({
+    ...fund,
+    updates: undefined,
+    nr_cotst: fund.updates[fund.updates.length - 1]?.nr_cotst,
+  }));
 };
 
 export const fundUpdate = async (file: IUpdate[]): Promise<void> => {

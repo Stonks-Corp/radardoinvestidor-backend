@@ -35,7 +35,7 @@ export interface IFunds {
 }
 
 export interface IUpdate{
-  [cnpj_fundo: string]:{
+    CNPJ_FUNDO: string;
     TP_FUNDO: string;
     DT_COMPTC: string;
     VL_TOTAL: number;
@@ -44,5 +44,4 @@ export interface IUpdate{
     CAPTC_DIA: number;
     RESG_DIA: number;
     NR_COTST: number;
-  };
 }

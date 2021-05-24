@@ -217,23 +217,20 @@ export const fundUpdate = async (file: IUpdate[]): Promise<void> => {
 };
 
 export const getFundDetails = async (
-  cnpj: string,
-): Promise<IFundDetails> => {
+  cnpj: string
+): Promise<IFundDetails | Record<string, never>> => {
   const fundosDetail = await prisma.fundo.findFirst({
-    where:{
-      cnpj_fundo:{
-        contains: cnpj,
-        mode: 'insensitive',
-      },
+    where: {
+      cnpj_fundo: cnpj,
     },
-    select:{
+    select: {
       denom_social: true,
       cnpj_fundo: true,
       classe: true,
       vl_patrim_liq: true,
       tp_fundo: true,
       sit: true,
-      dt_ini_ativ:true,
+      dt_ini_ativ: true,
       admin: true,
       cd_cvm: true,
       cnpj_admin: true,
@@ -254,7 +251,7 @@ export const getFundDetails = async (
       rentab_fundo: true,
       taxa_adm: true,
       taxa_perfm: true,
-      trib_lprazo:true,
+      trib_lprazo: true,
       auditor: true,
       cnpj_auditor: true,
       updates: {
@@ -271,14 +268,25 @@ export const getFundDetails = async (
     },
   });
 
-  return fundosDetail.map((fund) => ({
-    ...fund,
-    tp_fundo: fund.updates[fund.updates.length - 1].tp_fundo,
-    dt_comptc: fund.updates[fund.updates.length - 1].dt_comptc,
-    vlr_total: fund.updates[fund.updates.length - 1].vlr_total,
-    vlt_quota: fund.updates[fund.updates.length - 1].vlt_quota,
-    captc_dia: fund.updates[fund.updates.length - 1].captc_dia,
-    resg_dia: fund.updates[fund.updates.length - 1].resg_dia,
-    nr_cotst: fund.updates[fund.updates.length - 1].nr_cotst,
-  }));
+  let response = {};
+
+  if (fundosDetail) {
+    response = {
+      ...fundosDetail,
+      updates: undefined,
+      tp_fundo: fundosDetail.updates[fundosDetail.updates.length - 1].tp_fundo,
+      dt_comptc:
+        fundosDetail.updates[fundosDetail.updates.length - 1].dt_comptc,
+      vlr_total:
+        fundosDetail.updates[fundosDetail.updates.length - 1].vlr_total,
+      vlt_quota:
+        fundosDetail.updates[fundosDetail.updates.length - 1].vlt_quota,
+      captc_dia:
+        fundosDetail.updates[fundosDetail.updates.length - 1].captc_dia,
+      resg_dia: fundosDetail.updates[fundosDetail.updates.length - 1].resg_dia,
+      nr_cotst: fundosDetail.updates[fundosDetail.updates.length - 1].nr_cotst,
+    };
+  }
+
+  return response;
 };

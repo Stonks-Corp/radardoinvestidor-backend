@@ -1,5 +1,5 @@
 import prisma from '../database/prisma';
-import { IFunds, IInitialFundData, IUpdate } from './interface';
+import { IFunds, IInitialFundData, IUpdate, IFundDetails } from './interface';
 
 export const addFundInfo = async (file: IFunds): Promise<void> => {
   const funds = Object.entries(file);
@@ -214,4 +214,79 @@ export const fundUpdate = async (file: IUpdate[]): Promise<void> => {
       console.log(`Fund update error: ${CNPJ_FUNDO}`);
     }
   }
+};
+
+export const getFundDetails = async (
+  cnpj: string
+): Promise<IFundDetails | Record<string, never>> => {
+  const fundosDetail = await prisma.fundo.findFirst({
+    where: {
+      cnpj_fundo: cnpj,
+    },
+    select: {
+      denom_social: true,
+      cnpj_fundo: true,
+      classe: true,
+      vl_patrim_liq: true,
+      tp_fundo: true,
+      sit: true,
+      dt_ini_ativ: true,
+      admin: true,
+      cd_cvm: true,
+      cnpj_admin: true,
+      condom: true,
+      cpf_cnpj_gestor: true,
+      dt_cancel: true,
+      dt_const: true,
+      dt_fim_exerc: true,
+      dt_ini_classe: true,
+      dt_ini_exerc: true,
+      dt_ini_sit: true,
+      dt_patrim_liq: true,
+      fundo_cotas: true,
+      fundo_exclusivo: true,
+      gestor: true,
+      invest_qualif: true,
+      pf_pj_gestor: true,
+      rentab_fundo: true,
+      taxa_adm: true,
+      taxa_perfm: true,
+      trib_lprazo: true,
+      auditor: true,
+      cnpj_auditor: true,
+      updates: {
+        select: {
+          tp_fundo: true,
+          dt_comptc: true,
+          vlr_total: true,
+          vlt_quota: true,
+          captc_dia: true,
+          resg_dia: true,
+          nr_cotst: true,
+        },
+      },
+    },
+  });
+
+  let response = {};
+
+  if (fundosDetail) {
+    response = {
+      ...fundosDetail,
+      updates: undefined,
+      tp_fundo: fundosDetail.updates[fundosDetail.updates.length - 1].tp_fundo,
+      dt_comptc:
+        fundosDetail.updates[fundosDetail.updates.length - 1].dt_comptc,
+      vlr_total:
+        fundosDetail.updates[fundosDetail.updates.length - 1].vlr_total,
+      vlt_quota:
+        fundosDetail.updates[fundosDetail.updates.length - 1].vlt_quota,
+      captc_dia:
+        fundosDetail.updates[fundosDetail.updates.length - 1].captc_dia,
+      resg_dia: fundosDetail.updates[fundosDetail.updates.length - 1].resg_dia,
+      nr_cotst: fundosDetail.updates[fundosDetail.updates.length - 1].nr_cotst,
+    };
+  }
+
+  return response;
 };

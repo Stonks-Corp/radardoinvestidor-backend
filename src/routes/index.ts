@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { addFundInfo, fundUpdate, getFunds } from '../controllers/fund';
+import { addFundInfo, fundUpdate, getFundDetails, getFunds } from '../controllers/fund';
 import authentication from '../middleware/authentication';
 
 const routes = express.Router();
@@ -19,6 +19,19 @@ routes.get('/pesquisa', async (req: Request, res: Response) => {
   } catch (e) {
     res.status(400).send({
       error: 'Failed to get funds from database',
+    });
+  }
+});
+
+routes.get('/fundo/:cnpj', async (req: Request, res: Response) => {
+  try {
+    const { cnpj } = req.params;
+    const fundos = await getFundDetails(cnpj);
+    res.status(200).send(fundos);
+
+  } catch (e) {
+    res.send(400).send({
+      error: 'Failed to fetch fund',
     });
   }
 });

@@ -165,15 +165,33 @@ export const fundUpdate = async (file: IUpdate[]): Promise<void> => {
         },
         data: {
           updates: {
-            create: {
-              vlr_total: String(VL_TOTAL),
-              vlt_quota: String(VL_QUOTA),
-              captc_dia: String(CAPTC_DIA),
-              resg_dia: String(RESG_DIA),
-              tp_fundo: TP_FUNDO,
-              dt_comptc: new Date(DT_COMPTC) || null,
-              vl_patrim_liq: String(VL_PATRIM_LIQ),
-              nr_cotst: String(NR_COTST),
+            upsert: {
+              where: {
+                cnpj_fundo_dt_comptc: {
+                  cnpj_fundo: CNPJ_FUNDO,
+                  dt_comptc: new Date(DT_COMPTC),
+                },
+              },
+              update: {
+                vlr_total: String(VL_TOTAL),
+                vlt_quota: String(VL_QUOTA),
+                captc_dia: String(CAPTC_DIA),
+                resg_dia: String(RESG_DIA),
+                tp_fundo: TP_FUNDO,
+                dt_comptc: new Date(DT_COMPTC) || null,
+                vl_patrim_liq: String(VL_PATRIM_LIQ),
+                nr_cotst: String(NR_COTST),
+              },
+              create: {
+                vlr_total: String(VL_TOTAL),
+                vlt_quota: String(VL_QUOTA),
+                captc_dia: String(CAPTC_DIA),
+                resg_dia: String(RESG_DIA),
+                tp_fundo: TP_FUNDO,
+                dt_comptc: new Date(DT_COMPTC) || null,
+                vl_patrim_liq: String(VL_PATRIM_LIQ),
+                nr_cotst: String(NR_COTST),
+              },
             },
           },
         },

@@ -1,6 +1,5 @@
-import { Fundo } from '@prisma/client';
 import prisma from '../database/prisma';
-import { IFundDetails, IFunds, IUpdate } from './interface';
+import { IFunds, IInitialFundData, IUpdate, IFundDetails } from './interface';
 
 export const addFundInfo = async (file: IFunds): Promise<void> => {
   const funds = Object.entries(file);
@@ -118,7 +117,7 @@ export const addFundInfo = async (file: IFunds): Promise<void> => {
 export const getFunds = async (
   search?: string,
   skip?: string
-): Promise<Fundo[]> => {
+): Promise<IInitialFundData[]> => {
   const fundos = await prisma.fundo.findMany({
     where: {
       OR: [
@@ -136,10 +135,85 @@ export const getFunds = async (
         },
       ],
     },
+    select: {
+      denom_social: true,
+      cnpj_fundo: true,
+      vl_patrim_liq: true,
+      classe: true,
+      updates: {
+        select: {
+          nr_cotst: true,
+        },
+      },
+    },
     take: 50,
     skip: skip ? parseInt(skip, 10) : 0,
   });
-  return fundos;
+  return fundos.map((fund) => ({
+    ...fund,
+    updates: undefined,
+    nr_cotst: fund.updates[fund.updates.length - 1]?.nr_cotst,
+  }));
+};
+
+export const fundUpdate = async (file: IUpdate[]): Promise<void> => {
+  // eslint-disable-next-line
+  for (const line of file) {
+    const {
+      CNPJ_FUNDO,
+      TP_FUNDO,
+      DT_COMPTC,
+      VL_TOTAL,
+      VL_QUOTA,
+      VL_PATRIM_LIQ,
+      CAPTC_DIA,
+      RESG_DIA,
+      NR_COTST,
+    } = line;
+
+    try {
+      // eslint-disable-next-line
+      await prisma.fundo.update({
+        where: {
+          cnpj_fundo: String(CNPJ_FUNDO),
+        },
+        data: {
+          updates: {
+            upsert: {
+              where: {
+                cnpj_fundo_dt_comptc: {
+                  cnpj_fundo: CNPJ_FUNDO,
+                  dt_comptc: new Date(DT_COMPTC),
+                },
+              },
+              update: {
+                vlr_total: String(VL_TOTAL),
+                vlt_quota: String(VL_QUOTA),
+                captc_dia: String(CAPTC_DIA),
+                resg_dia: String(RESG_DIA),
+                tp_fundo: TP_FUNDO,
+                dt_comptc: new Date(DT_COMPTC) || null,
+                vl_patrim_liq: String(VL_PATRIM_LIQ),
+                nr_cotst: String(NR_COTST),
+              },
+              create: {
+                vlr_total: String(VL_TOTAL),
+                vlt_quota: String(VL_QUOTA),
+                captc_dia: String(CAPTC_DIA),
+                resg_dia: String(RESG_DIA),
+                tp_fundo: TP_FUNDO,
+                dt_comptc: new Date(DT_COMPTC) || null,
+                vl_patrim_liq: String(VL_PATRIM_LIQ),
+                nr_cotst: String(NR_COTST),
+              },
+            },
+          },
+        },
+      });
+    } catch (e) {
+      console.log(`Fund update error: ${CNPJ_FUNDO}`);
+    }
+  }
 };
 
 export const getFundDetails = async (
@@ -207,47 +281,4 @@ export const getFundDetails = async (
     resg_dia: fund.updates[fund.updates.length - 1].resg_dia,
     nr_cotst: fund.updates[fund.updates.length - 1].nr_cotst,
   }));
-};
-
-export const fundUpdate = async (file: IUpdate): Promise<void> => {
-  const funds = Object.entries(file);
-  // eslint-disable-next-line
-  for (const line of funds) {
-    const {
-      TP_FUNDO,
-      DT_COMPTC,
-      VL_TOTAL,
-      VL_QUOTA,
-      VL_PATRIM_LIQ,
-      CAPTC_DIA,
-      RESG_DIA,
-      NR_COTST,
-    } = line[1];
-
-    try {
-      // eslint-disable-next-line
-      await prisma.fundo.update({
-        where: {
-          cnpj_fundo: line[0],
-        },
-        data: {
-          updates: {
-            create: {
-              vlr_total: String(VL_TOTAL),
-              vlt_quota: String(VL_QUOTA),
-              captc_dia: String(CAPTC_DIA),
-              resg_dia: String(RESG_DIA),
-              rentabilidade: '',
-              tp_fundo: TP_FUNDO,
-              dt_comptc: new Date(DT_COMPTC) || null,
-              vl_patrim_liq: String(VL_PATRIM_LIQ),
-              nr_cotst: String(NR_COTST),
-            },
-          },
-        },
-      });
-    } catch (e) {
-      console.log(`Fund update error: ${line[0]}`);
-    }
-  }
 };

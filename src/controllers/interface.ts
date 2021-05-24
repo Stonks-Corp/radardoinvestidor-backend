@@ -31,11 +31,11 @@ export interface IFundAttributes {
 }
 
 export interface IFunds {
-  [cnpj_fundo: string]: IFundAttributes
+  [cnpj_fundo: string]: IFundAttributes;
 }
 
 export interface IUpdate{
-  [cnpj_fundo: string]:{
+    CNPJ_FUNDO: string;
     TP_FUNDO: string;
     DT_COMPTC: string;
     VL_TOTAL: number;
@@ -44,7 +44,14 @@ export interface IUpdate{
     CAPTC_DIA: number;
     RESG_DIA: number;
     NR_COTST: number;
-  };
+}
+
+export interface IInitialFundData {
+  denom_social: string | null;
+  cnpj_fundo: string | null;
+  vl_patrim_liq: string | null;
+  classe: string | null;
+  nr_cotst: string | null;
 }
 
 export interface IFundDetails{

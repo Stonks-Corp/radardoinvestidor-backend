@@ -85,7 +85,6 @@ async function main() {
             vlt_quota: String(update.vlt_quota),
             captc_dia: String(update.captc_dia),
             resg_dia: String(update.resg_dia),
-            rentabilidade: '',
             tp_fundo: String(update.tp_fundo),
             dt_comptc: new Date(update.dt_comptc) || null,
             vl_patrim_liq: String(update.vl_patrim_liq),

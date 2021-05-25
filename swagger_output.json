@@ -78,14 +78,14 @@
         }
       }
     },
-    "/api/fundo": {
+    "/api/fundo/{cnpj_fundo}": {
       "get": {
         "tags": [
           "Rotas"
         ],
         "summary": "Busca um fundo a partir de um cnpj.",
-        "description": "Retorna o fundo encontrado no banco de dados.",
-        "operationId": "fundo/",
+        "description": "Retorna o fundo encontrado com base no cnpj fornecido no banco de dados.",
+        "operationId": "fundo/:cnpj",
         "consumes": [
           "application/json",
           "application/xml"
@@ -96,8 +96,8 @@
         ],
         "parameters": [
           {
-            "name": "cnpj",
-            "in": "query",
+            "name": "cnpj_fundo",
+            "in": "path",
             "description": "Recebe um cnpj que deseja realizar a pesquisa no banco de dados.",
             "required": true,
             "schema": {
@@ -172,7 +172,7 @@
           {
             "in": "body",
             "name": "cnpj_fundo",
-            "description": "Modelo dos dados de um fundo.",
+            "description": "Modelo dos dados de um fundo. Usar todo este modelo dentro de [ ].",
             "required": true,
             "schema": {
               "$ref": "#/definitions/fundo_update"
@@ -194,23 +194,9 @@
     "fundo": {
       "type": "object",
       "required": [
-        "createdAt",
-        "updatedAt",
         "cnpj_fundo"
       ],
       "properties": {
-        "createdAt": {
-          "description": "Data de criação do fundo no banco de dados.",
-          "type": "string",
-          "format": "date",
-          "example": "2021-12-31"
-        },
-        "updatedAt": {
-          "description": "Data de alteração do fundo no banco de dados.",
-          "type": "string",
-          "format": "date",
-          "example": "2021-12-31"
-        },
         "cnpj_fundo": {
           "type": "string",
           "description": "CNPJ do fundo de investimento.",

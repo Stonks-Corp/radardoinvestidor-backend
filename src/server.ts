@@ -1,9 +1,9 @@
 import express from 'express';
 import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
 import routes from './routes';
 
-const swaggerUi = require('swagger-ui-express');
-const swaggerFile = require('../swagger_output.json');
+import swaggerFile from './swagger_output.json';
 
 const PORT = 4000;
 const app = express();

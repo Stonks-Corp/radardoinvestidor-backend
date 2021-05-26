@@ -47,7 +47,7 @@
           "Rotas"
         ],
         "summary": "Retorna uma lista de fundos filtrada por uma string.",
-        "description": "Retorna os fundos encontrados no banco de dados, filtrados por uma string comparada com as colunas de denominação social e cnpj do fundo.\n Retorna um objeto com as seguintes informações do fundo: denominação social, cnpj, patrimonio líquido, class e número de cotistas.",
+        "description": "Retorna os fundos encontrados no banco de dados, filtrados por uma string comparada com as colunas de denominação social e cnpj do fundo.\n\nRetorna um objeto com as seguintes informações do fundo: denominação social, cnpj, patrimonio líquido, classe e número de cotistas.",
         "operationId": "pesquisa",
         "consumes": [
           "application/json",
@@ -61,7 +61,7 @@
           {
             "name": "s",
             "in": "query",
-            "description": "Recebe uma palavra ou segmento do qual deseja realizar a pesquisa no banco de dados.",
+            "description": "Recebe palavras e números para realizar a pesquisa no banco de dados.",
             "required": true,
             "schema": {
               "type": "string"
@@ -98,7 +98,7 @@
           {
             "name": "cnpj_fundo",
             "in": "path",
-            "description": "Recebe um cnpj que deseja realizar a pesquisa no banco de dados.",
+            "description": "Recebe um cnpj, no formato padrão e.g. 97.929.213/0001-34, para realizar a pesquisa no banco de dados.\n\nPS: O Swagger já faz o Encoding da URL, mas pode ser que em outro lugar não faça.",
             "required": true,
             "schema": {
               "type": "string"
@@ -121,7 +121,7 @@
           "Rotas"
         ],
         "summary": "Adiciona um novo fundo no banco de dados.",
-        "description": "Passa o modelo das tabelas como parametro. Sem url do modelo ainda ❗",
+        "description": "Passa o modelo das tabelas em json como parametro.\n\nRetorna as mensagens http indicando se concluiu, ou não, a operação.\n\nRota em testes❗",
         "operationId": "fundo",
         "consumes": [
           "application/json",
@@ -135,7 +135,7 @@
           {
             "in": "body",
             "name": "cnpj",
-            "description": "Modelo dos dados de um fundo.",
+            "description": "Passa o modelo dos dados de um fundo.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/fundo"
@@ -158,7 +158,7 @@
           "Rotas"
         ],
         "summary": "Adiciona os dados que atualizam com maior frequência.",
-        "description": "Passa o id e os novos dados do modelo. Sem url do modelo ainda ❗",
+        "description": "Passa o id e os novos dados do modelo, para adicionar na tabela de Fundo_Update.",
         "operationId": "update",
         "consumes": [
           "application/json",
@@ -172,7 +172,7 @@
           {
             "in": "body",
             "name": "cnpj_fundo",
-            "description": "Modelo dos dados de um fundo. Usar todo este modelo dentro de [ ].",
+            "description": "Passa o modelo de dados de um fundo. Respeitar o formato do modelo exemplo fornecido.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/fundo_update"

@@ -46,8 +46,8 @@
         "tags": [
           "Rotas"
         ],
-        "summary": "Pesquisa uma string no banco de dados.",
-        "description": "Retorna os fundos encontrados no banco de dados.\nAtualmente, busca pelas colunas de denominação social do fundo, e por cnpj do fundo.",
+        "summary": "Retorna uma lista de fundos filtrada por uma string.",
+        "description": "Retorna os fundos encontrados no banco de dados, filtrados por uma string comparada com as colunas de denominação social e cnpj do fundo.\n Retorna um objeto com as seguintes informações do fundo: denominação social, cnpj, patrimonio líquido, class e número de cotistas.",
         "operationId": "pesquisa",
         "consumes": [
           "application/json",
@@ -84,7 +84,7 @@
           "Rotas"
         ],
         "summary": "Busca um fundo a partir de um cnpj.",
-        "description": "Retorna o fundo encontrado com base no cnpj fornecido no banco de dados.",
+        "description": "Retorna todas informações do fundo encontrado a partir do cnpj fornecido.",
         "operationId": "fundo/:cnpj",
         "consumes": [
           "application/json",

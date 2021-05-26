@@ -1,5 +1,6 @@
 import prisma from '../database/prisma';
 import { IFunds, IInitialFundData, IUpdate, IFundDetails } from './interface';
+import { response } from 'express';
 
 export const addFundInfo = async (file: IFunds): Promise<void> => {
   const funds = Object.entries(file);
@@ -300,7 +301,12 @@ export const getChart = async (fundos: string[]) => {
     },
     select: {
       cnpj_fundo: true,
-      updates: true,
+      updates: {
+        select: {
+          dt_comptc: true,
+          vlt_quota: true,
+        },
+      },
     },
   });
 
@@ -308,11 +314,11 @@ export const getChart = async (fundos: string[]) => {
 
   // eslint-disable-next-line
   for (const fundo of fundosQuery) {
-    const fundoRent: number[] = [];
+    const fundoRent: any[] = [];
     const quota1 = parseFloat(fundo.updates[0].vlt_quota || '1');
     fundo.updates.forEach((update) => {
       const rentabilidade = parseFloat(update.vlt_quota || '1') / quota1;
-      fundoRent.push(rentabilidade);
+      fundoRent.push({diff:rentabilidade, date:update.dt_comptc});
     });
     fundosResponse.push({
       cnpj: fundo.cnpj_fundo,

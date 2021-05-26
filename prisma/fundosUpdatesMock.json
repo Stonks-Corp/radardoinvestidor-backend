@@ -43,5 +43,6 @@
     {"cnpj_fundo": "00002", "tp_fundo": "FI", "dt_comptc": "2021-09-01", "vlr_total": 42714570.85, "vlt_quota": 27.460789, "vl_patrim_liq": 42698617.85, "captc_dia": 0.0, "resg_dia": 17551.51, "nr_cotst": 7100},
     {"cnpj_fundo": "00003", "tp_fundo": "FI", "dt_comptc": "2021-09-01", "vlr_total": 42714570.85, "vlt_quota": 27.460789, "vl_patrim_liq": 42698617.85, "captc_dia": 0.0, "resg_dia": 17551.51, "nr_cotst": 7100},
     {"cnpj_fundo": "00004", "tp_fundo": "FI", "dt_comptc": "2021-09-01", "vlr_total": 17246018.42, "vlt_quota": 28.8860670, "vl_patrim_liq": 17239974.16, "captc_dia": 0.0, "resg_dia": 0.0, "nr_cotst": 960},
-    {"cnpj_fundo": "00005", "tp_fundo": "FI", "dt_comptc": "2021-09-01", "vlr_total": 17172226361.07, "vlt_quota": 736.45282796, "vl_patrim_liq": 17162936603.89, "captc_dia": 0.0, "resg_dia": 0.0, "nr_cotst": 38}
+    {"cnpj_fundo": "00005", "tp_fundo": "FI", "dt_comptc": "2021-09-01", "vlr_total": 17172226361.07, "vlt_quota": 736.45282796, "vl_patrim_liq": 17162936603.89, "captc_dia": 0.0, "resg_dia": 0.0, "nr_cotst": 38},
+    {"cnpj_fundo": "97.929.213/0001-34", "tp_fundo": "FMP-FGTS CL", "dt_comptc": "1996-09-30", "vlr_total": 9998726291.38, "vlt_quota": "142.618.854.585.864.000.000", "vl_patrim_liq": 9996233502.87, "captc_dia": 9922981787.48, "resg_dia": 99913218.53, "nr_cotst": 984773}
 ]

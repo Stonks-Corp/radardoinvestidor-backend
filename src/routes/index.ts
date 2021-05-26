@@ -1,13 +1,20 @@
 import express, { Request, Response } from 'express';
-import { addFundInfo, fundUpdate, getFundDetails, getFunds } from '../controllers/fund';
+import {
+  addFundInfo,
+  fundUpdate,
+  getFundDetails,
+  getFunds,
+} from '../controllers/fund';
 import authentication from '../middleware/authentication';
 
 const routes = express.Router();
 
+// Funcao inicial da aplicacao, somente testa se aplicacao ativa
 routes.get('/', (req: Request, res: Response) => {
   res.send('Hello world');
 });
 
+// Pesquisa por fundos no banco de dados, a partir de uma query param
 routes.get('/pesquisa', async (req: Request, res: Response) => {
   try {
     const param = req.query;
@@ -23,12 +30,12 @@ routes.get('/pesquisa', async (req: Request, res: Response) => {
   }
 });
 
+// Retorna o primeiro fundo encontrado a partir de um cnpj
 routes.get('/fundo/:cnpj', async (req: Request, res: Response) => {
   try {
     const { cnpj } = req.params;
     const fundos = await getFundDetails(cnpj);
     res.status(200).send(fundos);
-
   } catch (e) {
     res.send(400).send({
       error: 'Failed to fetch fund',
@@ -38,6 +45,7 @@ routes.get('/fundo/:cnpj', async (req: Request, res: Response) => {
 
 routes.use(authentication);
 
+// Adiciona um novo fundo no banco de dados, passando um body json
 routes.post('/fundo', (req: Request, res: Response) => {
   try {
     addFundInfo(req.body);
@@ -49,6 +57,7 @@ routes.post('/fundo', (req: Request, res: Response) => {
   }
 });
 
+// Adiciona um novo fundo_update no banco de dados, passando um body json
 routes.post('/update', (req: Request, res: Response) => {
   try {
     fundUpdate(req.body);

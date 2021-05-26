@@ -290,3 +290,35 @@ export const getFundDetails = async (
 
   return response;
 };
+
+export const getChart = async (fundos: string[]) => {
+  const fundosQuery = await prisma.fundo.findMany({
+    where: {
+      cnpj_fundo: {
+        in: fundos,
+      },
+    },
+    select: {
+      cnpj_fundo: true,
+      updates: true,
+    },
+  });
+
+  const fundosResponse = [];
+
+  // eslint-disable-next-line
+  for (const fundo of fundosQuery) {
+    const fundoRent: number[] = [];
+    const quota1 = parseFloat(fundo.updates[0].vlt_quota || '1');
+    fundo.updates.forEach((update) => {
+      const rentabilidade = parseFloat(update.vlt_quota || '1') / quota1;
+      fundoRent.push(rentabilidade);
+    });
+    fundosResponse.push({
+      cnpj: fundo.cnpj_fundo,
+      rentab: fundoRent,
+    });
+  }
+
+  return fundosResponse;
+};

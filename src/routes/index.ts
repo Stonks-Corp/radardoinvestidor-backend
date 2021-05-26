@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import {
   addFundInfo,
   fundUpdate,
+  getChart,
   getFundDetails,
   getFunds,
 } from '../controllers/fund';
@@ -39,6 +40,21 @@ routes.get('/fundo/:cnpj', async (req: Request, res: Response) => {
   } catch (e) {
     res.send(400).send({
       error: 'Failed to fetch fund',
+    });
+  }
+});
+
+routes.get('/rentabilidade', async (req: Request, res: Response) => {
+  try {
+    const { fundos } = req.query;
+    if (!fundos) {
+      res.status(400).send({ error: 'Error in API request' });
+    }
+    const fundsChart = await getChart(fundos as string[]);
+    res.send(fundsChart);
+  } catch (e) {
+    res.status(400).send({
+      error: 'Failed to create chart response',
     });
   }
 });

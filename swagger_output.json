@@ -359,57 +359,60 @@
       }
     },
     "fundo_update": {
+      "type": "array",
+      "items": {
       "type": "object",
-      "required": [
-        "cnpj_fundo",
-        "dt_comptc"
-      ],
-      "properties": {
-        "cnpj_fundo": {
-          "type": "string",
-          "description": "CNPJ do fundo de investimento.",
-          "example": "00.071.477/0001-68"
-        },
-        "dt_comptc": {
-          "type": "string",
-          "format": "date",
-          "description": "Data de registro do fundo.",
-          "example": "2021-12-31"
-        },
-        "vlr_total": {
-          "type": "string",
-          "description": "Valor total.",
-          "example": "9998726291.38"
-        },
-        "vlt_quota": {
-          "type": "string",
-          "description": "Valor da quota.",
-          "example": "142.618.854.585.864.000.000"
-        },
-        "captc_dia": {
-          "type": "string",
-          "description": "Captação diária.",
-          "example": "9922981787.48"
-        },
-        "resg_dia": {
-          "type": "string",
-          "description": "Resgate diário.",
-          "example": "99913218.53"
-        },
-        "tp_fundo": {
-          "type": "string",
-          "description": "Tipo de Fundo (Por padrão, usar FI).",
-          "example": "FACFIF"
-        },
-        "vl_patrim_liq": {
-          "type": "string",
-          "description": "Valor do patrimônio líquido.",
-          "example": "9996233502.87"
-        },
-        "nr_cotst": {
-          "type": "string",
-          "description": "Número de cotistas.",
-          "example": "984773"
+        "required": [
+          "cnpj_fundo",
+          "dt_comptc"
+        ],
+        "properties": {
+          "cnpj_fundo": {
+            "type": "string",
+            "description": "CNPJ do fundo de investimento.",
+            "example": "00.071.477/0001-68"
+          },
+          "dt_comptc": {
+            "type": "string",
+            "format": "date",
+            "description": "Data de registro do fundo.",
+            "example": "2021-12-31"
+          },
+          "vlr_total": {
+            "type": "string",
+            "description": "Valor total.",
+            "example": "9998726291.38"
+          },
+          "vlt_quota": {
+            "type": "string",
+            "description": "Valor da quota.",
+            "example": "142.618.854.585.864.000.000"
+          },
+          "captc_dia": {
+            "type": "string",
+            "description": "Captação diária.",
+            "example": "9922981787.48"
+          },
+          "resg_dia": {
+            "type": "string",
+            "description": "Resgate diário.",
+            "example": "99913218.53"
+          },
+          "tp_fundo": {
+            "type": "string",
+            "description": "Tipo de Fundo (Por padrão, usar FI).",
+            "example": "FACFIF"
+          },
+          "vl_patrim_liq": {
+            "type": "string",
+            "description": "Valor do patrimônio líquido.",
+            "example": "9996233502.87"
+          },
+          "nr_cotst": {
+            "type": "string",
+            "description": "Número de cotistas.",
+            "example": "984773"
+          }
         }
       }
     }

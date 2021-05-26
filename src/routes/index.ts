@@ -49,6 +49,7 @@ routes.get('/rentabilidade', async (req: Request, res: Response) => {
     const { fundos } = req.query;
     if (!fundos) {
       res.status(400).send({ error: 'Error in API request' });
+      return;
     }
     const fundsChart = await getChart(fundos as string[]);
     res.send(fundsChart);

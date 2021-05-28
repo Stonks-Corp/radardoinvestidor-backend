@@ -46,12 +46,16 @@ routes.get('/fundo/:cnpj', async (req: Request, res: Response) => {
 
 routes.get('/rentabilidade', async (req: Request, res: Response) => {
   try {
-    const { fundos } = req.query;
+    const { fundos, from, to } = req.query;
     if (!fundos) {
       res.status(400).send({ error: 'Error in API request' });
       return;
     }
-    const fundsChart = await getChart(fundos as string[]);
+    const fundsChart = await getChart(
+      fundos as string[],
+      from as string | undefined,
+      to as string | undefined
+    );
     res.send(fundsChart);
   } catch (e) {
     res.status(400).send({

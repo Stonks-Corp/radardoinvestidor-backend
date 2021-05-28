@@ -1,5 +1,11 @@
 import prisma from '../database/prisma';
-import { IFunds, IInitialFundData, IUpdate, IFundDetails } from './interface';
+import {
+  IFunds,
+  IInitialFundData,
+  IUpdate,
+  IFundDetails,
+  IRentability,
+} from './interface';
 
 export const addFundInfo = async (file: IFunds): Promise<void> => {
   const funds = Object.entries(file);
@@ -291,19 +297,27 @@ export const getFundDetails = async (
   return response;
 };
 
-export const getChart = async (fundos: string[]) => {
+export const getChart = async (
+  fundos: string[],
+  from?: string,
+  to?: string
+): Promise<{ name: string; rentab: IRentability[] }[]> => {
   const fundosQuery = await prisma.fundo.findMany({
     where: {
       cnpj_fundo: {
         in: fundos,
       },
     },
-    select: {
-      cnpj_fundo: true,
+    include: {
       updates: {
-        select: {
-          dt_comptc: true,
-          vlt_quota: true,
+        where: {
+          dt_comptc: {
+            gte: from ? new Date(from) : undefined,
+            lte: to ? new Date(to) : undefined,
+          },
+        },
+        orderBy: {
+          dt_comptc: 'asc',
         },
       },
     },
@@ -313,14 +327,17 @@ export const getChart = async (fundos: string[]) => {
 
   // eslint-disable-next-line
   for (const fundo of fundosQuery) {
-    const fundoRent: any[] = [];
+    const fundoRent: IRentability[] = [];
     const quota1 = parseFloat(fundo.updates[0].vlt_quota || '1');
     fundo.updates.forEach((update) => {
-      const rentabilidade = parseFloat(update.vlt_quota || '1') / quota1;
-      fundoRent.push({ diff: rentabilidade, date: update.dt_comptc });
+      const rentabilidade = parseFloat(update.vlt_quota || '1') / quota1 - 1;
+      fundoRent.push({
+        diff: rentabilidade,
+        date: update.dt_comptc?.toISOString() || '',
+      });
     });
     fundosResponse.push({
-      cnpj: fundo.cnpj_fundo,
+      name: fundo.cnpj_fundo,
       rentab: fundoRent,
     });
   }

@@ -1,13 +1,20 @@
-function getBenchmarks() {
+import axios from 'axios';
 
-    const request = require('request');
+const getCdi = async (
+  from?: string,
+  to?: string
+): Promise<{ data: string; valor: string }[]> => {
+  const cdiRequest = await axios.get<{ data: string; valor: string }[]>(
+    'https://api.bcb.gov.br/dados/serie/bcdata.sgs.12/dados',
+    {
+      params: {
+        formato: 'json',
+        dataInicial: from,
+        dataFinal: to,
+      },
+    }
+  );
+  return cdiRequest.data;
+};
 
-    request.get('https://api.bcb.gov.br/dados/serie/bcdata.sgs.12/dados?formato=json&dataInicial=01/01/2020&dataFinal=24/05/2021', (error, response, body) => {
-        if (error) {
-            console.dir(error);
-        }
-        console.dir(JSON.parse(body));
-    })
-}
-
-export default getBenchmarks;
+export default getCdi;

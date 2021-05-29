@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import prisma from '../database/prisma';
 import {
   IFunds,
@@ -6,6 +7,8 @@ import {
   IFundDetails,
   IRentability,
 } from './interface';
+import getCdi from '../benchmarks/benchmarks';
+import accumulate from '../utils/accumulate';
 
 export const addFundInfo = async (file: IFunds): Promise<void> => {
   const funds = Object.entries(file);
@@ -302,6 +305,13 @@ export const getChart = async (
   from?: string,
   to?: string
 ): Promise<{ name: string; rentab: IRentability[] }[]> => {
+  const cdi = await getCdi(
+    from ? dayjs(from).format('DD/MM/YYYY') : undefined,
+    to ? dayjs(to).format('DD/MM/YYYY') : undefined
+  );
+
+  const cdiRentability = accumulate(cdi);
+
   const fundosQuery = await prisma.fundo.findMany({
     where: {
       cnpj_fundo: {
@@ -332,7 +342,7 @@ export const getChart = async (
     fundo.updates.forEach((update) => {
       const rentabilidade = parseFloat(update.vlt_quota || '1') / quota1 - 1;
       fundoRent.push({
-        diff: rentabilidade,
+        diff: parseFloat(rentabilidade.toFixed(4)),
         date: update.dt_comptc?.toISOString() || '',
       });
     });
@@ -341,6 +351,11 @@ export const getChart = async (
       rentab: fundoRent,
     });
   }
+
+  fundosResponse.push({
+    name: 'CDI',
+    rentab: cdiRentability,
+  });
 
   return fundosResponse;
 };

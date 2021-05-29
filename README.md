@@ -36,11 +36,34 @@ localhost:4000/doc/
 
 ## Alguns comandos para minupulação do postgres
 
-'''
+```
 $ docker exec -it warren-db bash
 $ psql warren warren
 $ \x
 $ select * from public."Fundo";
 $ select count(*) from public."Fundo";
 $ delete from public."Fundo";
-'''
+```
+
+## Deploy
+```
+Baixar Github de deploy:
+    - Clone seguinte projeto na mesma pasta em que o projeto backend foi clonado (CUIDADO: não misture os fontes): https://github.com/Hercilio1/rdi-backend-deploy
+
+Sincronize com o Github de deploy:
+    - Rode o comando: $ sh deploy.sh
+    - Vá para o projeto de deploy clonado (rdi-backend-deploy)
+    - Faça um commit e envie um push (na master mesmo)
+
+Novo build do projeto:
+    - Acesse o serviço Code Build
+    - Acesse o build rdi-backend-deploy
+    - Pressione no botão em destaque "Start Build"
+    - Acompanhe até o final para garantir que não ocorrerão erros
+
+Pause a ECS task para gerar uma nova task com a última versão:
+    - Acesse o serviço ECS
+    - Acesse o cluster: rdi-frontend-cluster
+    - Vá para tab > tasks
+    - Puase (stop) as tasks relacionadas a task definition "rdi-backend-task"
+```

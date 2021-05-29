@@ -7,8 +7,8 @@ import {
   IFundDetails,
   IRentability,
 } from './interface';
-import getCdi from '../benchmarks/benchmarks';
 import accumulate from '../utils/accumulate';
+import getBenchmark from "../benchmarks/benchmarks";
 
 export const addFundInfo = async (file: IFunds): Promise<void> => {
   const funds = Object.entries(file);
@@ -305,12 +305,19 @@ export const getChart = async (
   from?: string,
   to?: string
 ): Promise<{ name: string; rentab: IRentability[] }[]> => {
-  const cdi = await getCdi(
+  const cdiBenchmark = await getBenchmark(
+    'CDI',
+    from ? dayjs(from).format('DD/MM/YYYY') : undefined,
+    to ? dayjs(to).format('DD/MM/YYYY') : undefined
+  );
+  const bovespaBenchmark = await getBenchmark(
+    'BOVESPA',
     from ? dayjs(from).format('DD/MM/YYYY') : undefined,
     to ? dayjs(to).format('DD/MM/YYYY') : undefined
   );
 
-  const cdiRentability = accumulate(cdi);
+  const cdiRentability = accumulate(cdiBenchmark);
+  const bovespaRentability = accumulate(bovespaBenchmark);
 
   const fundosQuery = await prisma.fundo.findMany({
     where: {
@@ -355,6 +362,11 @@ export const getChart = async (
   fundosResponse.push({
     name: 'CDI',
     rentab: cdiRentability,
+  });
+
+  fundosResponse.push({
+    name: 'BOVESPA',
+    rentab: bovespaRentability,
   });
 
   return fundosResponse;

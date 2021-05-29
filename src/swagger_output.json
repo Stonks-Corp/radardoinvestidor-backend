@@ -114,6 +114,62 @@
           }
         }
       }
+    },"/api/rentabilidade": {
+      "get": {
+        "tags": [
+          "Rotas"
+        ],
+        "summary": "Busca a rentabilidade dos fundos solicitados.",
+        "description": "Retorna os valores de rentabilidade com a sua data.\n\nMais adiante, esta rota poderá retornar junto o CDI, Ibovespa, entre outros.",
+        "operationId": "rentabilidade",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "fundos",
+            "in": "query",
+            "description": "Recebe o cnpj completo dos fundos que quer buscar a rentabilidade.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Recebe a data inicial para o intervalo de rentabilidade (e.g. 2021-05-01). Se for nula, retorna todas rentabilidades do banco.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "Recebe a data final para o intervalo de rentabilidade (e.g. 2021-08-01). Se for nula, retorna todas rentabilidades do banco.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
     },
     "/api/fundo": {
       "post": {

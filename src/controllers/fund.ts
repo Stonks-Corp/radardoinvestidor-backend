@@ -310,14 +310,8 @@ export const getChart = async (
     from ? dayjs(from).format('DD/MM/YYYY') : undefined,
     to ? dayjs(to).format('DD/MM/YYYY') : undefined
   );
-  const bovespaBenchmark = await getBenchmark(
-    'BOVESPA',
-    from ? dayjs(from).format('DD/MM/YYYY') : undefined,
-    to ? dayjs(to).format('DD/MM/YYYY') : undefined
-  );
 
   const cdiRentability = accumulate(cdiBenchmark);
-  const bovespaRentability = accumulate(bovespaBenchmark);
 
   const fundosQuery = await prisma.fundo.findMany({
     where: {
@@ -347,14 +341,14 @@ export const getChart = async (
     const fundoRent: IRentability[] = [];
     const quota1 = parseFloat(fundo.updates[0].vlt_quota || '1');
     fundo.updates.forEach((update) => {
-      const rentabilidade = parseFloat(update.vlt_quota || '1') / quota1 - 1;
+      const rentabilidade = (parseFloat(update.vlt_quota || '1') / quota1 - 1) * 100;
       fundoRent.push({
-        diff: parseFloat(rentabilidade.toFixed(4)),
+        diff: parseFloat(rentabilidade.toFixed(3)),
         date: update.dt_comptc?.toISOString() || '',
       });
     });
     fundosResponse.push({
-      name: fundo.cnpj_fundo,
+      name: fundo.denom_social || "",
       rentab: fundoRent,
     });
   }
@@ -362,11 +356,6 @@ export const getChart = async (
   fundosResponse.push({
     name: 'CDI',
     rentab: cdiRentability,
-  });
-
-  fundosResponse.push({
-    name: 'BOVESPA',
-    rentab: bovespaRentability,
   });
 
   return fundosResponse;

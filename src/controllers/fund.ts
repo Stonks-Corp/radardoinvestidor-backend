@@ -8,7 +8,7 @@ import {
   IRentability,
 } from './interface';
 import accumulate from '../utils/accumulate';
-import getBenchmark from "../benchmarks/benchmarks";
+import getBenchmark from '../benchmarks/benchmarks';
 
 export const addFundInfo = async (file: IFunds): Promise<void> => {
   const funds = Object.entries(file);
@@ -341,14 +341,15 @@ export const getChart = async (
     const fundoRent: IRentability[] = [];
     const quota1 = parseFloat(fundo.updates[0].vlt_quota || '1');
     fundo.updates.forEach((update) => {
-      const rentabilidade = (parseFloat(update.vlt_quota || '1') / quota1 - 1) * 100;
+      const rentabilidade =
+        (parseFloat(update.vlt_quota || '1') / quota1 - 1) * 100;
       fundoRent.push({
         diff: parseFloat(rentabilidade.toFixed(3)),
         date: update.dt_comptc?.toISOString() || '',
       });
     });
     fundosResponse.push({
-      name: fundo.denom_social || "",
+      name: fundo.denom_social || '',
       rentab: fundoRent,
     });
   }

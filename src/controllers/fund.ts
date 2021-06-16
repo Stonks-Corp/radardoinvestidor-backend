@@ -361,3 +361,33 @@ export const getChart = async (
 
   return fundosResponse;
 };
+
+
+export const getComparacao = async (
+  fund: string[]
+): Promise<IInitialFundData[]> => {
+  const fundoArray = await prisma.fundo.findMany({
+    where: {
+      cnpj_fundo: {
+        in: fund,
+      },
+    },
+    select: {
+      denom_social: true,
+      cnpj_fundo: true,
+      vl_patrim_liq: true,
+      classe: true,
+      updates: {
+        select: {
+          nr_cotst: true,
+        },
+      },
+    },
+  });
+
+  return fundoArray.map((fundo) => ({
+    ...fundo,
+    updates: undefined,
+    nr_cotst: fundo.updates[fundo.updates.length - 1]?.nr_cotst,
+  }));
+};

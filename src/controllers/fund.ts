@@ -125,21 +125,38 @@ export const addFundInfo = async (file: IFunds): Promise<void> => {
 
 export const getFunds = async (
   search?: string,
-  skip?: string
+  skip?: string,
+  classes?: string[],
+  pl?: string,
+  cotistas?: string
 ): Promise<IInitialFundData[]> => {
   const fundos = await prisma.fundo.findMany({
     where: {
-      OR: [
+      AND: [
         {
-          denom_social: {
-            contains: search || '',
-            mode: 'insensitive',
+          OR: [
+            {
+              denom_social: {
+                contains: search || '',
+                mode: 'insensitive',
+              },
+            },
+            {
+              cnpj_fundo: {
+                contains: search || '',
+                mode: 'insensitive',
+              },
+            },
+          ],
+        },
+        {
+          classe: {
+            in: classes,
           },
         },
         {
-          cnpj_fundo: {
-            contains: search || '',
-            mode: 'insensitive',
+          vl_patrim_liq: {
+            gte: pl,
           },
         },
       ],
@@ -158,11 +175,23 @@ export const getFunds = async (
     take: 50,
     skip: skip ? parseInt(skip, 10) : 0,
   });
-  return fundos.map((fund) => ({
-    ...fund,
-    updates: undefined,
-    nr_cotst: fund.updates[fund.updates.length - 1]?.nr_cotst,
-  }));
+  const searchList = fundos
+    .map((fund) => {
+      if (
+        (fund.updates[fund.updates.length - 1]?.nr_cotst || 0) >=
+        (cotistas || 0)
+      ) {
+        return {
+          ...fund,
+          updates: undefined,
+          nr_cotst: fund.updates[fund.updates.length - 1]?.nr_cotst,
+        };
+      }
+      return undefined;
+    })
+    .filter((x) => x);
+
+  return searchList as IInitialFundData[];
 };
 
 export const fundUpdate = async (file: IUpdate[]): Promise<void> => {
@@ -361,7 +390,6 @@ export const getChart = async (
 
   return fundosResponse;
 };
-
 
 export const getComparacao = async (
   fund: string[]

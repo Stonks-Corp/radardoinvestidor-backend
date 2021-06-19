@@ -7,6 +7,7 @@ import {
   getComparacao,
   getFundDetails,
   getFunds,
+  getVolatility,
 } from '../controllers/fund';
 import authentication from '../middleware/authentication';
 
@@ -88,6 +89,27 @@ routes.get('/fundosComparacao', async (req: Request, res: Response) => {
     });
   }
 });
+
+routes.get('/volatilidade', async (req: Request, res: Response) => {
+  try {
+    const { fundos, from, to } = req.query;
+    if (!fundos) {
+      res.status(400).send({ error: 'Error in API request' });
+      return;
+    }
+    const volatility = await getVolatility(
+      fundos as string[],
+      from as string | undefined,
+      to as string | undefined
+    );
+    res.send(volatility);
+  } catch (e) {
+    res.status(400).send({
+      error: 'Failed to create chart response',
+    });
+  }
+});
+
 
 routes.use(authentication);
 

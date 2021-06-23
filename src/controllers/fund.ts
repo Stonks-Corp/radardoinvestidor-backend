@@ -156,11 +156,6 @@ export const getFunds = async (
             in: classes,
           },
         },
-        {
-          vl_patrim_liq: {
-            gte: pl,
-          },
-        },
       ],
     },
     select: {
@@ -181,7 +176,9 @@ export const getFunds = async (
     .map((fund) => {
       if (
         parseInt(fund.updates[fund.updates.length - 1]?.nr_cotst || '0', 10) >=
-        parseInt(cotistas || '0', 10)
+        parseInt(cotistas || '0', 10) 
+        &&
+        parseFloat(fund.vl_patrim_liq || '0') >= parseFloat(pl || '0')
       ) {
         return {
           ...fund,

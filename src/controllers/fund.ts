@@ -394,7 +394,7 @@ export const getChart = async (
             (parseFloat(update.vlt_quota || '1') / quota1 - 1) * 100;
           fundoRent.map((data) => {
             if (data.date == (update.dt_comptc?.toISOString())) {
-              data.diff = rentabilidade;
+              data.diff = parseFloat(rentabilidade.toFixed(2));
             }
           }); 
         } catch (e) {

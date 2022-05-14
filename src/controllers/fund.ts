@@ -343,8 +343,6 @@ export const getChart = async (
     from ? dayjs(from).format('DD/MM/YYYY') : undefined,
     to ? dayjs(to).format('DD/MM/YYYY') : undefined
   );
-//  console.log(from)
-// console.log(new Date(from && from === "" ? from : "2015-06-18"))
 
   const cdiRentability = accumulate(cdiBenchmark);
 

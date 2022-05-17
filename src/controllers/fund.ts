@@ -9,8 +9,6 @@ import {
 } from './interface';
 import accumulate from '../utils/accumulate';
 import getBenchmark from '../benchmarks/benchmarks';
-import { updateSourceFile, visitFunctionBody } from 'typescript';
-import { kMaxLength } from 'buffer';
 
 export const addFundInfo = async (file: IFunds): Promise<void> => {
   const funds = Object.entries(file);

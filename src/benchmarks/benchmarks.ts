@@ -10,7 +10,23 @@ const getBenchmark = async (
    * CÓDIGO 12: CDI
    * CÓDIGO 7832: BOVESPA
    * */
-  const codeBenchmark = benchmark === 'CDI' ? 12 : 7832;
+  let codeBenchmark;
+
+  switch(benchmark) {
+
+    case 'CDI':
+      codeBenchmark = 12;
+      break;
+      
+    case 'BOVESPA':
+      codeBenchmark = 7832;
+      break;
+      
+      case 'SELIC':
+      codeBenchmark = 11;
+      break;
+  }
+
   const bechmarkRequest = await axios.get<{ data: string; valor: string }[]>(
     `https://api.bcb.gov.br/dados/serie/bcdata.sgs.${codeBenchmark}/dados`,
     {

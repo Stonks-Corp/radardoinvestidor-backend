@@ -14,7 +14,7 @@ import authentication from '../middleware/authentication';
 const routes = express.Router();
 
 // Funcao inicial da aplicacao, somente testa se aplicacao ativa
-routes.get('/', (req: Request, res: Response) => {
+routes.get('/', (_req: Request, res: Response) => {
   res.send('Hello world');
 });
 

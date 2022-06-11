@@ -481,11 +481,11 @@ export const getVolatility = async (
     const volatility: IRentability[] = [];
 
     const fundArrAux: number[] = [];
-    for (var i = 1; i < fundo.updates?.length; i++) {
+    for (let i = 1; i < fundo.updates?.length; i++) {
       fundArrAux.push(parseFloat(fundo.updates[i]?.vlt_quota || '1') - parseFloat(fundo.updates[i - 1]?.vlt_quota || '1'))
     }
 
-    for (var i = 21; i < fundArrAux.length; i++) {
+    for (let i = 21; i < fundArrAux.length; i++) {
       const aux = math.std(fundArrAux.slice(i - 21, i)) * Math.sqrt(252);
       volatility.push({
         diff: parseFloat(aux.toFixed(3)),

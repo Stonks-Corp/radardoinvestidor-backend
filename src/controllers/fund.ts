@@ -8,7 +8,7 @@ import {
   IRentability,
 } from './interface';
 import accumulate from '../utils/accumulate';
-import getBenchmark from '../benchmarks/benchmarks';
+import getBenchmark from '../benchmarks/getBenchmark';
 
 export const addFundInfo = async (file: IFunds): Promise<void> => {
   const funds = Object.entries(file);
@@ -174,7 +174,7 @@ export const getFunds = async (
     .map((fund) => {
       if (
         parseInt(fund.updates[fund.updates.length - 1]?.nr_cotst || '0', 10) >=
-        parseInt(cotistas || '0', 10) 
+        parseInt(cotistas || '0', 10)
         &&
         parseFloat(fund.vl_patrim_liq || '0') >= parseFloat(pl || '0')
       ) {
@@ -321,12 +321,12 @@ export const getFundDetails = async (
         resg_dia: fundosDetail.updates[fundosDetail.updates.length - 1]?.resg_dia,
         nr_cotst: fundosDetail.updates[fundosDetail.updates.length - 1]?.nr_cotst,
       };
-    } 
-  } catch (e) {
-      console.error(
-        `Error when getting details of the fund \n error: ${e}`
-      );
     }
+  } catch (e) {
+    console.error(
+      `Error when getting details of the fund \n error: ${e}`
+    );
+  }
 
   return response;
 };
@@ -392,7 +392,7 @@ export const getChart = async (
             if (data.date == (update.dt_comptc?.toISOString())) {
               data.diff = parseFloat(rentabilidade.toFixed(2));
             }
-          }); 
+          });
         } catch (e) {
           console.error(
             `Error in the generation of the profitability of the fund ${fundo.cnpj_fundo} \n error: ${e}`
@@ -403,7 +403,7 @@ export const getChart = async (
         name: fundo.denom_social || '',
         rentab: fundoRent,
       });
-    }      
+    }
   } catch (e) {
     console.error(
       `Error in the generation of the profitability of the funds ${e}`
@@ -479,14 +479,14 @@ export const getVolatility = async (
   // eslint-disable-next-line
   for (const fundo of fundosQuery) {
     const volatility: IRentability[] = [];
-    
+
     const fundArrAux: number[] = [];
-    for(var i = 1; i < fundo.updates?.length; i++) {
+    for (var i = 1; i < fundo.updates?.length; i++) {
       fundArrAux.push(parseFloat(fundo.updates[i]?.vlt_quota || '1') - parseFloat(fundo.updates[i - 1]?.vlt_quota || '1'))
     }
 
     for (var i = 21; i < fundArrAux.length; i++) {
-      const aux = math.std(fundArrAux.slice(i-21, i)) * Math.sqrt(252);
+      const aux = math.std(fundArrAux.slice(i - 21, i)) * Math.sqrt(252);
       volatility.push({
         diff: parseFloat(aux.toFixed(3)),
         date: fundo.updates[i]?.dt_comptc?.toISOString() || '',

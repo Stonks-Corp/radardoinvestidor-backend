@@ -368,7 +368,7 @@ export const getChart = async (
   const fundosResponse = [];
   const nullArray: IRentability[] = []
   cdiRentability.forEach(val => nullArray.push(Object.assign({}, val)));
-  nullArray.map((data) => {
+  nullArray.forEach((data) => {
     data.diff = null;
   });
 
@@ -388,7 +388,7 @@ export const getChart = async (
         try {
           const rentabilidade =
             (parseFloat(update.vlt_quota || '1') / quota1 - 1) * 100;
-          fundoRent.map((data) => {
+          fundoRent.forEach((data) => {
             if (data.date == (update.dt_comptc?.toISOString())) {
               data.diff = parseFloat(rentabilidade.toFixed(2));
             }

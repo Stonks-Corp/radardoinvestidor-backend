@@ -342,7 +342,14 @@ export const getChart = async (
     to ? dayjs(to).format('DD/MM/YYYY') : undefined
   );
 
+  const selicBenchmark = await getBenchmark(
+    'SELIC',
+    from ? dayjs(from).format('DD/MM/YYYY') : undefined,
+    to ? dayjs(to).format('DD/MM/YYYY') : undefined
+  );
+
   const cdiRentability = accumulate(cdiBenchmark);
+  const selicRentability = accumulate(selicBenchmark);
 
   const fundosQuery = await prisma.fundo.findMany({
     where: {
@@ -413,6 +420,11 @@ export const getChart = async (
   fundosResponse.push({
     name: 'CDI',
     rentab: cdiRentability,
+  });
+
+  fundosResponse.push({
+    name: 'SELIC',
+    rentab: selicRentability,
   });
 
   return fundosResponse;
